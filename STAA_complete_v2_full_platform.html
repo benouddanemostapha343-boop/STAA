@@ -1,0 +1,1120 @@
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --g:#006233;--gl:#00873c;--g2:#004d28;
+  --r:#D21034;--rl:#ff1a40;
+  --gold:#c9a227;--goldl:#e8c547;
+  --dark:#07100a;--dark2:#0d1810;--dark3:#111f14;
+  --glass:rgba(255,255,255,0.06);--glass2:rgba(255,255,255,0.1);--glass3:rgba(255,255,255,0.14);
+  --b:rgba(255,255,255,0.1);--b2:rgba(255,255,255,0.18);
+  --muted:rgba(255,255,255,0.5);--dim:rgba(255,255,255,0.3);--faint:rgba(255,255,255,0.15);
+  font-family:'Outfit',sans-serif;
+}
+body{background:var(--dark);color:#fff;overflow-x:hidden;min-height:100vh}
+
+/* FONTS */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Outfit:wght@300;400;500;600;700&display=swap');
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:3px;height:3px}
+::-webkit-scrollbar-thumb{background:rgba(0,98,51,.4);border-radius:2px}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:200;height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 1.5rem;background:rgba(7,16,10,0.92);backdrop-filter:blur(24px);border-bottom:1px solid var(--b)}
+.logo{display:flex;align-items:center;gap:9px;font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;cursor:pointer}
+.flag{display:flex;width:28px;height:19px;border-radius:3px;overflow:hidden;border:1px solid var(--b2);flex-shrink:0}
+.fg{flex:1;background:var(--g)}
+.fw{flex:1;background:#fff;display:flex;align-items:center;justify-content:center;font-size:7.5px;color:var(--r)}
+.nav-tabs{display:flex;gap:2px}
+.nt{background:none;border:none;color:var(--muted);font-family:'Outfit',sans-serif;font-size:.78rem;padding:5px 11px;border-radius:7px;cursor:pointer;transition:.2s;white-space:nowrap}
+.nt:hover{color:#fff;background:var(--glass2)}
+.nt.a{color:#fff;background:rgba(0,98,51,.2);border:1px solid rgba(0,98,51,.35)}
+.nav-right{display:flex;align-items:center;gap:8px}
+.lang-btn{background:var(--glass);border:1px solid var(--b);color:var(--muted);padding:4px 10px;border-radius:6px;font-size:.72rem;cursor:pointer;transition:.2s}
+.lang-btn:hover,.lang-btn.a{background:var(--g);color:#fff;border-color:var(--g)}
+.notif{position:relative;background:var(--glass);border:1px solid var(--b);width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.9rem}
+.notif::after{content:'3';position:absolute;top:-4px;right:-4px;background:var(--r);color:#fff;font-size:.55rem;width:14px;height:14px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700}
+
+/* PAGES */
+.pg{display:none;min-height:calc(100vh - 60px);animation:fadeIn .3s ease}
+.pg.a{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* ─── LANDING ─── */
+.hero{position:relative;min-height:88vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:3rem 1.5rem;overflow:hidden}
+.hero-orb{position:absolute;border-radius:50%;filter:blur(60px);pointer-events:none}
+.orb1{width:500px;height:400px;background:rgba(0,98,51,.15);top:-100px;left:-100px}
+.orb2{width:400px;height:350px;background:rgba(210,16,52,.08);bottom:-80px;right:-80px}
+.orb3{width:300px;height:250px;background:rgba(201,162,39,.07);top:30%;left:60%}
+.live-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(0,98,51,.18);border:1px solid rgba(0,98,51,.45);color:#3dcc77;padding:4px 13px;border-radius:20px;font-size:.72rem;font-weight:600;margin-bottom:1.3rem;letter-spacing:.06em}
+.dot-live{width:6px;height:6px;background:#3dcc77;border-radius:50%;animation:blink 1.4s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+h1.ht{font-family:'Playfair Display',serif;font-size:clamp(2.2rem,5.5vw,4.5rem);font-weight:900;line-height:1.06;letter-spacing:-1.5px;margin-bottom:.9rem}
+.ht .g{color:var(--gl)}
+.ht .r{color:var(--rl)}
+.hero-desc{color:var(--muted);font-size:.97rem;max-width:500px;line-height:1.75;margin-bottom:2.2rem}
+.search-wrap{display:flex;gap:8px;width:100%;max-width:540px;margin-bottom:.8rem}
+.search-inp{flex:1;background:var(--glass2);border:1px solid var(--b2);border-radius:12px;padding:11px 18px;color:#fff;font-family:'Outfit',sans-serif;font-size:.92rem;outline:none;transition:.2s}
+.search-inp::placeholder{color:var(--dim)}
+.search-inp:focus{border-color:rgba(0,98,51,.6);background:var(--glass3)}
+.search-go{background:var(--g);color:#fff;border:none;padding:11px 22px;border-radius:12px;font-family:'Outfit',sans-serif;font-size:.9rem;font-weight:600;cursor:pointer;transition:.2s;white-space:nowrap}
+.search-go:hover{background:var(--gl);transform:translateY(-1px)}
+.search-hints{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-bottom:2.5rem}
+.hint-chip{background:var(--glass);border:1px solid var(--b);color:var(--dim);padding:3px 10px;border-radius:12px;font-size:.72rem;cursor:pointer;transition:.2s}
+.hint-chip:hover{color:#fff;border-color:var(--g)}
+.hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;width:100%;max-width:760px}
+.hs{background:var(--glass);border:1px solid var(--b);border-radius:14px;padding:1.1rem;backdrop-filter:blur(8px)}
+.hs-num{font-family:'Playfair Display',serif;font-size:1.9rem;font-weight:700}
+.hs-num.g{color:var(--gl)}
+.hs-num.r{color:var(--rl)}
+.hs-num.gold{color:var(--goldl)}
+.hs-lbl{font-size:.71rem;color:var(--muted);margin-top:3px}
+/* Feature cards */
+.features{padding:2.5rem 1.5rem;max-width:1100px;margin:0 auto}
+.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.feat-card{background:var(--glass);border:1px solid var(--b);border-radius:16px;padding:1.3rem;cursor:pointer;transition:.25s;position:relative;overflow:hidden}
+.feat-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,98,51,.08),transparent);opacity:0;transition:.25s}
+.feat-card:hover{border-color:rgba(0,98,51,.45);transform:translateY(-2px)}
+.feat-card:hover::before{opacity:1}
+.feat-icon{font-size:1.6rem;margin-bottom:.75rem}
+.feat-title{font-weight:600;font-size:.9rem;margin-bottom:.4rem}
+.feat-desc{font-size:.78rem;color:var(--muted);line-height:1.6}
+.feat-arrow{position:absolute;top:1.1rem;right:1.1rem;color:var(--dim);font-size:.8rem;transition:.2s}
+.feat-card:hover .feat-arrow{color:var(--gl);transform:translateX(3px)}
+
+/* ─── MAP ─── */
+.map-layout{display:grid;grid-template-columns:260px 1fr;height:calc(100vh - 60px)}
+.map-sb{background:var(--dark2);border-right:1px solid var(--b);overflow-y:auto;display:flex;flex-direction:column}
+.sb-head{padding:1.1rem;border-bottom:1px solid var(--b)}
+.sb-search{display:flex;gap:6px;margin-bottom:.8rem}
+.sb-inp{flex:1;background:var(--glass);border:1px solid var(--b);border-radius:8px;padding:7px 10px;color:#fff;font-family:'Outfit',sans-serif;font-size:.8rem;outline:none}
+.sb-inp::placeholder{color:var(--dim)}
+.layer-sec{padding:1rem}
+.layer-sec-title{font-size:.65rem;color:var(--dim);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.6rem;font-weight:600}
+.ly{display:flex;align-items:center;justify-content:space-between;padding:7px 10px;border-radius:9px;cursor:pointer;margin-bottom:3px;transition:.2s;border:1px solid transparent}
+.ly:hover{background:var(--glass)}
+.ly.on{background:rgba(0,98,51,.12);border-color:rgba(0,98,51,.25)}
+.ly-l{display:flex;align-items:center;gap:7px;font-size:.8rem}
+.ly-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.sw{width:28px;height:16px;background:rgba(255,255,255,.15);border-radius:8px;position:relative;transition:.2s;flex-shrink:0}
+.sw.on{background:var(--g)}
+.sw::after{content:'';position:absolute;top:2px;left:2px;width:12px;height:12px;background:#fff;border-radius:50%;transition:.2s}
+.sw.on::after{left:14px}
+.site-panel{padding:1rem;border-top:1px solid var(--b);margin-top:auto}
+.site-panel.hidden{display:none}
+.sp-badge{font-size:.65rem;font-weight:700;letter-spacing:.1em;color:var(--gl);background:rgba(0,98,51,.2);border:1px solid rgba(0,98,51,.3);padding:2px 8px;border-radius:4px;display:inline-block;margin-bottom:.6rem}
+.sp-name{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;margin-bottom:.3rem}
+.sp-type{font-size:.75rem;color:var(--muted);margin-bottom:.7rem}
+.sp-row{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.05);font-size:.77rem}
+.sp-row:last-of-type{border:none}
+.sp-val{color:var(--muted)}
+.sp-score{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--gl);text-align:center;margin:.75rem 0}
+.sp-ai-btn{width:100%;background:linear-gradient(135deg,var(--g),var(--gl));color:#fff;border:none;padding:8px;border-radius:9px;font-family:'Outfit',sans-serif;font-size:.8rem;font-weight:600;cursor:pointer;margin-top:.5rem;transition:.2s}
+.sp-ai-btn:hover{opacity:.88}
+.map-main{position:relative;background:#0a150d;overflow:hidden}
+.map-canvas{width:100%;height:100%;cursor:crosshair}
+/* Map overlays */
+.map-ctrl{position:absolute;top:12px;right:12px;display:flex;flex-direction:column;gap:6px}
+.mc-btn{background:rgba(7,16,10,.88);border:1px solid var(--b);color:var(--muted);width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.85rem;transition:.2s;backdrop-filter:blur(8px);font-family:'Outfit',sans-serif}
+.mc-btn:hover{background:var(--glass2);color:#fff;border-color:var(--b2)}
+.map-cats{position:absolute;top:12px;left:12px;display:flex;flex-direction:column;gap:5px}
+.cat-pill{background:rgba(7,16,10,.85);border:1px solid var(--b);color:var(--muted);padding:5px 12px;border-radius:20px;font-size:.72rem;cursor:pointer;backdrop-filter:blur(8px);transition:.2s;display:flex;align-items:center;gap:5px;font-family:'Outfit',sans-serif}
+.cat-pill.on{color:#fff;border-color:var(--gl);background:rgba(0,98,51,.25)}
+.map-status{position:absolute;bottom:12px;right:12px;background:rgba(7,16,10,.85);border:1px solid var(--b);border-radius:10px;padding:6px 12px;font-size:.7rem;color:var(--muted);backdrop-filter:blur(8px)}
+.map-legend{position:absolute;bottom:12px;left:12px;background:rgba(7,16,10,.88);border:1px solid var(--b);border-radius:10px;padding:10px 14px;backdrop-filter:blur(8px)}
+.leg-title{font-size:.65rem;color:var(--dim);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px}
+.leg-item{display:flex;align-items:center;gap:6px;font-size:.72rem;color:var(--muted);margin-bottom:3px}
+.leg-dot{width:8px;height:8px;border-radius:50%}
+.map-tooltip{position:absolute;background:rgba(7,16,10,.96);border:1px solid var(--b2);border-radius:11px;padding:10px 14px;pointer-events:none;opacity:0;transition:opacity .15s;z-index:10;min-width:160px}
+.map-tooltip.show{opacity:1}
+.tt-name{font-weight:600;font-size:.87rem;margin-bottom:3px}
+.tt-meta{font-size:.72rem;color:var(--muted)}
+.tt-score{font-size:.78rem;color:var(--gl);margin-top:4px}
+
+/* ─── ANALYTICS ─── */
+.dash{padding:1.8rem;background:var(--dark)}
+.dash-hdr{margin-bottom:1.8rem}
+.dash-hdr h2{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700}
+.dash-hdr p{color:var(--muted);font-size:.83rem;margin-top:3px}
+.dash-top{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:1.5rem}
+.time-tabs{display:flex;gap:3px;background:var(--glass);border:1px solid var(--b);border-radius:9px;padding:3px}
+.tt-tab{background:none;border:none;color:var(--muted);padding:4px 12px;border-radius:6px;font-size:.75rem;cursor:pointer;transition:.2s;font-family:'Outfit',sans-serif}
+.tt-tab.a{background:var(--g);color:#fff}
+.kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:1.5rem}
+.kpi{background:var(--glass);border:1px solid var(--b);border-radius:14px;padding:1.1rem;position:relative;overflow:hidden}
+.kpi::after{content:'';position:absolute;right:-10px;bottom:-10px;width:50px;height:50px;border-radius:50%;opacity:.08}
+.kpi.green::after{background:var(--g)}
+.kpi.gold::after{background:var(--gold)}
+.kpi.red::after{background:var(--r)}
+.kpi-v{font-family:'Playfair Display',serif;font-size:1.7rem;font-weight:700}
+.kpi-v.g{color:var(--gl)}.kpi-v.gold{color:var(--goldl)}.kpi-v.r{color:var(--rl)}
+.kpi-l{font-size:.7rem;color:var(--muted);margin-top:3px}
+.kpi-t{font-size:.68rem;margin-top:5px;display:flex;align-items:center;gap:3px}
+.up{color:#4dbb7a}.dn{color:var(--rl)}
+.dash-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.dc{background:var(--glass);border:1px solid var(--b);border-radius:16px;padding:1.3rem}
+.dc h3{font-size:.83rem;font-weight:600;margin-bottom:1.1rem;display:flex;justify-content:space-between;align-items:center}
+.dc-badge{font-size:.65rem;background:rgba(0,98,51,.2);color:var(--gl);padding:2px 7px;border-radius:4px;font-weight:500}
+/* Bar chart */
+.brow{display:flex;align-items:center;gap:8px;margin-bottom:7px}
+.bn{width:72px;font-size:.72rem;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bt{flex:1;height:7px;background:rgba(255,255,255,.07);border-radius:3px;overflow:hidden}
+.bf{height:100%;border-radius:3px;transition:width 1s ease}
+.bv{width:24px;text-align:right;font-size:.7rem;color:var(--dim)}
+/* Choropleth */
+.choro-wrap{width:100%;height:220px;position:relative;border-radius:10px;overflow:hidden;background:#0a150d}
+.choro-legend{display:flex;align-items:center;gap:6px;margin-top:8px;font-size:.68rem;color:var(--muted)}
+.choro-bar{flex:1;height:7px;border-radius:3px;background:linear-gradient(to right,rgba(0,98,51,.1),rgba(0,98,51,.4),rgba(0,98,51,.7),rgba(0,98,51,1))}
+/* Pie */
+.pie-area{display:flex;align-items:center;gap:1.5rem}
+.pie-leg{display:flex;flex-direction:column;gap:7px;flex:1}
+.pi{display:flex;align-items:center;gap:7px;font-size:.77rem}
+.pd{width:9px;height:9px;border-radius:2px;flex-shrink:0}
+/* Trend bars */
+.trend-area{display:flex;gap:3px;align-items:flex-end;height:140px}
+.tb-wrap{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px}
+.tb{width:100%;border-radius:2px 2px 0 0;background:rgba(0,98,51,.5);transition:height 1s ease}
+.tb.peak{background:var(--g)}
+.tb-l{font-size:.6rem;color:var(--dim)}
+/* Wilaya compare */
+.compare-table{width:100%;border-collapse:collapse;font-size:.78rem}
+.compare-table th{text-align:left;padding:6px 8px;color:var(--dim);font-size:.65rem;letter-spacing:.08em;text-transform:uppercase;font-weight:500;border-bottom:1px solid var(--b)}
+.compare-table td{padding:7px 8px;border-bottom:1px solid rgba(255,255,255,.04)}
+.compare-table tr:hover td{background:rgba(255,255,255,.03)}
+.score-pill{display:inline-block;padding:2px 8px;border-radius:4px;font-weight:600;font-size:.72rem}
+.sp-high{background:rgba(0,98,51,.25);color:#4dbb7a}
+.sp-med{background:rgba(201,162,39,.2);color:var(--goldl)}
+.sp-low{background:rgba(210,16,52,.2);color:#ff6b6b}
+
+/* ─── AI ─── */
+.ai-page{padding:2rem;max-width:860px;margin:0 auto}
+.ai-page h2{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;margin-bottom:.3rem}
+.ai-page .sub{color:var(--muted);font-size:.83rem;margin-bottom:1.8rem}
+.pref-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-bottom:1.2rem}
+.pl{font-size:.72rem;color:var(--muted);margin-bottom:5px;letter-spacing:.03em}
+.ps{width:100%;background:var(--glass2);border:1px solid var(--b);border-radius:9px;color:#fff;padding:9px 13px;font-family:'Outfit',sans-serif;font-size:.85rem;cursor:pointer;outline:none;appearance:none;transition:.2s}
+.ps:focus{border-color:rgba(0,98,51,.5)}
+.ps option{background:#111}
+.tag-row{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:1.2rem}
+.ptag{background:var(--glass);border:1px solid var(--b);color:var(--muted);padding:5px 13px;border-radius:18px;font-size:.78rem;cursor:pointer;transition:.2s;font-family:'Outfit',sans-serif}
+.ptag.s{background:rgba(0,98,51,.2);border-color:rgba(0,98,51,.5);color:#4dbb7a}
+.extra-inp{width:100%;background:var(--glass2);border:1px solid var(--b);border-radius:10px;color:#fff;padding:10px 13px;font-family:'Outfit',sans-serif;font-size:.85rem;resize:vertical;min-height:70px;outline:none;margin-bottom:1.2rem;transition:.2s}
+.extra-inp:focus{border-color:rgba(0,98,51,.5)}
+.ai-go{width:100%;background:linear-gradient(135deg,#006233,#00873c);color:#fff;border:none;padding:13px;border-radius:12px;font-family:'Outfit',sans-serif;font-size:1rem;font-weight:700;cursor:pointer;margin-bottom:1.5rem;transition:.2s;letter-spacing:.02em}
+.ai-go:hover{opacity:.9;transform:translateY(-1px)}
+.ai-go:disabled{opacity:.45;cursor:not-allowed;transform:none}
+.ai-box{background:var(--glass);border:1px solid var(--b);border-radius:16px;padding:1.4rem;display:none}
+.ai-box.show{display:block;animation:fadeIn .3s ease}
+.ai-box-hdr{display:flex;align-items:center;gap:8px;margin-bottom:1rem}
+.ai-badge-tag{background:rgba(0,98,51,.25);border:1px solid rgba(0,98,51,.45);color:#3dcc77;padding:3px 9px;border-radius:5px;font-size:.65rem;font-weight:700;letter-spacing:.1em}
+.ai-content{color:rgba(255,255,255,.85);line-height:1.8;font-size:.87rem;white-space:pre-wrap}
+/* Day cards */
+.day-cards{display:flex;flex-direction:column;gap:10px;margin-top:1rem}
+.day-c{background:rgba(0,98,51,.1);border:1px solid rgba(0,98,51,.22);border-radius:12px;padding:1rem 1.2rem}
+.day-c-head{font-size:.72rem;color:var(--gl);font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.5rem}
+
+/* ─── DECISION ─── */
+.dec-page{padding:1.8rem}
+.dec-page h2{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;margin-bottom:.3rem}
+.dec-page .sub{color:var(--muted);font-size:.83rem;margin-bottom:1.8rem}
+.opp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-bottom:1.5rem}
+.oc{border-radius:15px;padding:1.3rem;border:1px solid;position:relative;overflow:hidden;transition:.2s}
+.oc:hover{transform:translateY(-2px)}
+.oc.hi{background:linear-gradient(135deg,rgba(0,98,51,.22),rgba(0,98,51,.08));border-color:rgba(0,98,51,.38)}
+.oc.me{background:linear-gradient(135deg,rgba(201,162,39,.18),rgba(201,162,39,.05));border-color:rgba(201,162,39,.32)}
+.oc.lo{background:linear-gradient(135deg,rgba(210,16,52,.18),rgba(210,16,52,.05));border-color:rgba(210,16,52,.28)}
+.oc-badge{font-size:.62rem;font-weight:700;letter-spacing:.1em;padding:2px 8px;border-radius:4px;display:inline-block;margin-bottom:.6rem}
+.oc.hi .oc-badge{background:rgba(0,98,51,.38);color:#4dbb7a}
+.oc.me .oc-badge{background:rgba(201,162,39,.28);color:var(--goldl)}
+.oc.lo .oc-badge{background:rgba(210,16,52,.28);color:#ff7070}
+.oc-name{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;margin-bottom:.4rem}
+.oc-text{font-size:.76rem;color:var(--muted);line-height:1.6}
+.oc-score{position:absolute;top:1.2rem;right:1.2rem;font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;opacity:.35}
+.dec-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.dec-card{background:var(--glass);border:1px solid var(--b);border-radius:16px;padding:1.3rem}
+.dec-card h4{font-size:.83rem;font-weight:600;margin-bottom:1rem}
+.ir{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.05);font-size:.78rem}
+.ir:last-child{border:none}
+.iv{color:var(--muted)}
+.badge{padding:2px 7px;border-radius:4px;font-size:.65rem;font-weight:700}
+.b-r{background:rgba(210,16,52,.22);color:#ff7070}
+.b-a{background:rgba(201,162,39,.18);color:var(--goldl)}
+.b-g{background:rgba(0,98,51,.22);color:#4dbb7a}
+/* Prediction sparks */
+.spark{display:flex;gap:3px;align-items:flex-end;height:80px}
+.sp{flex:1;border-radius:2px 2px 0 0;background:rgba(0,98,51,.55)}
+.sp.pred{background:rgba(77,187,122,.35);border:1px dashed rgba(77,187,122,.5);border-bottom:none}
+.ai-insight{margin-top:.9rem;background:rgba(0,98,51,.1);border:1px solid rgba(0,98,51,.22);border-radius:10px;padding:.8rem 1rem;font-size:.78rem;line-height:1.65;color:rgba(255,255,255,.8)}
+.ai-insight strong{color:var(--gl)}
+
+/* ─── GIS UPLOAD ─── */
+.gis-page{padding:1.8rem;max-width:860px;margin:0 auto}
+.gis-page h2{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;margin-bottom:.3rem}
+.gis-page .sub{color:var(--muted);font-size:.83rem;margin-bottom:1.8rem}
+.up-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-bottom:1.5rem}
+.uz{border:2px dashed var(--b);border-radius:15px;padding:1.8rem;text-align:center;cursor:pointer;transition:.25s}
+.uz:hover{border-color:var(--gl);background:rgba(0,98,51,.06)}
+.uz-icon{font-size:2rem;margin-bottom:.65rem;opacity:.55}
+.uz-title{font-size:.87rem;font-weight:600;margin-bottom:.25rem}
+.uz-hint{font-size:.72rem;color:var(--muted)}
+.file-list{display:flex;flex-direction:column;gap:7px;margin-bottom:1.8rem}
+.fi{display:flex;align-items:center;gap:9px;background:var(--glass);border:1px solid var(--b);border-radius:10px;padding:9px 13px}
+.fi-icon{width:26px;height:26px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.63rem;font-weight:700;flex-shrink:0}
+.fi-geo{background:rgba(0,98,51,.28);color:#4dbb7a}
+.fi-csv{background:rgba(201,162,39,.22);color:var(--goldl)}
+.fi-name{flex:1;font-size:.82rem;font-weight:500}
+.fi-size{font-size:.7rem;color:var(--dim)}
+/* Score calc */
+.score-box{background:var(--glass);border:1px solid var(--b);border-radius:16px;padding:1.4rem}
+.score-box h3{font-size:.85rem;font-weight:600;margin-bottom:.3rem}
+.score-box p.formula{font-size:.75rem;color:var(--muted);margin-bottom:1.1rem;font-style:italic}
+.ts-formula{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:1.1rem}
+.tsf{border-radius:11px;padding:.9rem;text-align:center}
+.tsf.s{background:rgba(0,98,51,.18);border:1px solid rgba(0,98,51,.28)}
+.tsf.h{background:rgba(201,162,39,.14);border:1px solid rgba(201,162,39,.25)}
+.tsf.r{background:rgba(210,16,52,.12);border:1px solid rgba(210,16,52,.22)}
+.tsf.a{background:rgba(80,150,255,.1);border:1px solid rgba(80,150,255,.2)}
+.tsf-w{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700}
+.tsf-n{font-size:.68rem;color:var(--muted);margin-top:2px}
+.sl-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:1.1rem}
+.sl{label:{font-size:.68rem;color:var(--muted);display:block;margin-bottom:3px}}
+.sl label{font-size:.68rem;color:var(--muted);display:block;margin-bottom:3px}
+.sl input{width:100%;accent-color:var(--g);cursor:pointer}
+.sl span{font-size:.7rem;color:#fff}
+.ts-result{display:flex;align-items:center;justify-content:space-between;background:rgba(0,98,51,.14);border:1px solid rgba(0,98,51,.28);border-radius:10px;padding:.9rem 1.2rem}
+.ts-val{font-family:'Playfair Display',serif;font-size:2.3rem;font-weight:700;color:var(--gl)}
+.ts-label{font-size:.75rem;color:var(--muted)}
+/* Wilaya table in GIS */
+.wilaya-table{width:100%;border-collapse:collapse;font-size:.77rem;margin-top:1.3rem}
+.wilaya-table th{text-align:left;padding:6px 8px;color:var(--dim);font-size:.63rem;letter-spacing:.08em;text-transform:uppercase;border-bottom:1px solid var(--b)}
+.wilaya-table td{padding:6px 8px;border-bottom:1px solid rgba(255,255,255,.04)}
+.wilaya-table tr:hover td{background:rgba(255,255,255,.025)}
+.mini-bar{display:inline-block;height:5px;border-radius:2px;vertical-align:middle;margin-left:6px}
+
+/* ─── COMPARE ─── */
+.cmp-page{padding:1.8rem;max-width:960px;margin:0 auto}
+.cmp-page h2{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;margin-bottom:.3rem}
+.cmp-page .sub{color:var(--muted);font-size:.83rem;margin-bottom:1.8rem}
+.cmp-sel-row{display:flex;gap:10px;margin-bottom:1.5rem;align-items:flex-end}
+.cmp-sel-wrap{display:flex;flex-direction:column;gap:5px;flex:1}
+.cmp-sel-wrap label{font-size:.72rem;color:var(--muted)}
+.cmp-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-bottom:1.5rem}
+.cmp-card{background:var(--glass);border:1px solid var(--b);border-radius:16px;padding:1.3rem}
+.cmp-card h3{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;margin-bottom:1rem}
+.cmp-metric{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.05);font-size:.8rem}
+.cmp-metric:last-child{border:none}
+.cmp-val{font-weight:600}
+.cmp-radar{width:100%;height:240px;position:relative}
+.compare-btn{background:var(--g);color:#fff;border:none;padding:9px 20px;border-radius:9px;font-family:'Outfit',sans-serif;font-size:.82rem;font-weight:600;cursor:pointer;transition:.2s}
+.compare-btn:hover{background:var(--gl)}
+</style>
+
+<h2 class="sr-only">Smart Tourism Analytics Algeria (STAA) – منصة السياحة الذكية للجزائر. تحليلات GIS، توصيات ذكاء اصطناعي، لوحات تحكم تفاعلية لجميع الولايات الجزائرية الـ58.</h2>
+
+<!-- NAV -->
+<nav>
+  <div class="logo" onclick="go('land',this)">
+    <div class="flag"><div class="fg"></div><div class="fw">☽★</div></div>
+    STAA
+  </div>
+  <div class="nav-tabs">
+    <button class="nt a" onclick="go('land',this)">🏠 الرئيسية</button>
+    <button class="nt" onclick="go('map',this)">🗺️ الخريطة</button>
+    <button class="nt" onclick="go('analytics',this)">📊 التحليلات</button>
+    <button class="nt" onclick="go('ai',this)">✦ دليل الذكاء الاصطناعي</button>
+    <button class="nt" onclick="go('decision',this)">🏛️ لوحة القرار</button>
+    <button class="nt" onclick="go('compare',this)">⚖️ مقارنة الولايات</button>
+    <button class="nt" onclick="go('gis',this)">📁 رفع GIS</button>
+  </div>
+  <div class="nav-right">
+    <button class="lang-btn a" onclick="setLang('ar',this)">AR</button>
+    <button class="lang-btn" onclick="setLang('fr',this)">FR</button>
+    <button class="lang-btn" onclick="setLang('en',this)">EN</button>
+    <div class="notif">🔔</div>
+  </div>
+</nav>
+
+<!-- ═══ LANDING ═══ -->
+<div class="pg a" id="pg-land">
+  <div class="hero">
+    <div class="hero-orb orb1"></div>
+    <div class="hero-orb orb2"></div>
+    <div class="hero-orb orb3"></div>
+    <div style="position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;width:100%">
+      <div class="live-badge"><div class="dot-live"></div>المنصة مباشرة — آخر تحديث: اليوم</div>
+      <h1 class="ht">منصة السياحة الذكية<br><span class="g">للجزائر</span> <span class="r">STAA</span></h1>
+      <p class="hero-desc">استخبارات سياحية متكاملة تجمع خرائط GIS التفاعلية، التحليلات التنبؤية، وتوصيات الذكاء الاصطناعي عبر 58 ولاية جزائرية.</p>
+      <div class="search-wrap">
+        <input class="search-inp" id="heroInp" placeholder="ابحث عن ولاية، موقع سياحي، أو نشاط..." />
+        <button class="search-go" onclick="go('map',document.querySelectorAll('.nt')[1])">استكشف →</button>
+      </div>
+      <div class="search-hints">
+        <span class="hint-chip" onclick="go('map',document.querySelectorAll('.nt')[1])">تلمسان</span>
+        <span class="hint-chip" onclick="go('map',document.querySelectorAll('.nt')[1])">تمنراست</span>
+        <span class="hint-chip" onclick="go('map',document.querySelectorAll('.nt')[1])">القصبة</span>
+        <span class="hint-chip" onclick="go('map',document.querySelectorAll('.nt')[1])">تيميمون</span>
+        <span class="hint-chip" onclick="go('map',document.querySelectorAll('.nt')[1])">جاية</span>
+        <span class="hint-chip" onclick="go('map',document.querySelectorAll('.nt')[1])">تيبازة</span>
+      </div>
+      <div class="hero-stats">
+        <div class="hs"><div class="hs-num g" id="cnt1">0</div><div class="hs-lbl">موقع سياحي مسجل</div></div>
+        <div class="hs"><div class="hs-num" id="cnt2">0</div><div class="hs-lbl">ولاية مرسومة بـ GIS</div></div>
+        <div class="hs"><div class="hs-num r" id="cnt3">0</div><div class="hs-lbl">زيارة سنوية (مليون)</div></div>
+        <div class="hs"><div class="hs-num gold">★ 4.2</div><div class="hs-lbl">متوسط التقييم</div></div>
+      </div>
+    </div>
+  </div>
+  <!-- Feature cards -->
+  <div class="features">
+    <p style="font-size:.65rem;color:var(--dim);letter-spacing:.14em;text-transform:uppercase;margin-bottom:.7rem">وحدات المنصة</p>
+    <div class="feat-grid">
+      <div class="feat-card" onclick="go('map',document.querySelectorAll('.nt')[1])"><div class="feat-icon">🗺️</div><div class="feat-title">الخريطة السياحية التفاعلية</div><div class="feat-desc">طبقات GIS متعددة، تجميع الماركرز، فلترة حسب الفئة، وتفاصيل كل موقع بنقرة واحدة.</div><span class="feat-arrow">→</span></div>
+      <div class="feat-card" onclick="go('analytics',document.querySelectorAll('.nt')[2])"><div class="feat-icon">📊</div><div class="feat-title">لوحة التحليلات</div><div class="feat-desc">خرائط حرارية، مخططات بيانية، إحصاءات الولايات، ومؤشرات الأداء السياحي.</div><span class="feat-arrow">→</span></div>
+      <div class="feat-card" onclick="go('ai',document.querySelectorAll('.nt')[3])"><div class="feat-icon">✦</div><div class="feat-title">توصيات الذكاء الاصطناعي</div><div class="feat-desc">خطط سفر مخصصة بالذكاء الاصطناعي حسب الميزانية والمدة والاهتمامات.</div><span class="feat-arrow">→</span></div>
+      <div class="feat-card" onclick="go('decision',document.querySelectorAll('.nt')[4])"><div class="feat-icon">🏛️</div><div class="feat-title">لوحة صانعي القرار</div><div class="feat-desc">خريطة الفرص السياحية، فجوات البنية التحتية، والتنبؤ بالطلب.</div><span class="feat-arrow">→</span></div>
+      <div class="feat-card" onclick="go('compare',document.querySelectorAll('.nt')[5])"><div class="feat-icon">⚖️</div><div class="feat-title">مقارنة الولايات</div><div class="feat-desc">قارن بين ولايتين أو أكثر بمخططات رادار وجداول المقارنة التفصيلية.</div><span class="feat-arrow">→</span></div>
+      <div class="feat-card" onclick="go('gis',document.querySelectorAll('.nt')[6])"><div class="feat-icon">📁</div><div class="feat-title">رفع بيانات GIS</div><div class="feat-desc">استيراد GeoJSON من QGIS، رفع CSV، وحساب مؤشر النقاط السياحية ديناميكياً.</div><span class="feat-arrow">→</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MAP ═══ -->
+<div class="pg" id="pg-map">
+  <div class="map-layout">
+    <div class="map-sb">
+      <div class="sb-head">
+        <p style="font-size:.7rem;color:var(--dim);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.7rem;font-weight:600">الطبقات والفلاتر</p>
+        <div class="sb-search">
+          <input class="sb-inp" id="mapSearch" placeholder="ابحث عن موقع..." oninput="filterSites(this.value)"/>
+        </div>
+      </div>
+      <div class="layer-sec">
+        <p class="layer-sec-title">المواقع السياحية</p>
+        <div class="ly on" onclick="toggleLy(this,'#4dbb7a','history')"><div class="ly-l"><div class="ly-dot" style="background:#4dbb7a"></div>مواقع تاريخية</div><div class="sw on"></div></div>
+        <div class="ly on" onclick="toggleLy(this,'#60a5fa','beach')"><div class="ly-l"><div class="ly-dot" style="background:#60a5fa"></div>شواطئ</div><div class="sw on"></div></div>
+        <div class="ly on" onclick="toggleLy(this,'#fbbf24','desert')"><div class="ly-l"><div class="ly-dot" style="background:#fbbf24"></div>السياحة الصحراوية</div><div class="sw on"></div></div>
+        <div class="ly on" onclick="toggleLy(this,'#f87171','culture')"><div class="ly-l"><div class="ly-dot" style="background:#f87171"></div>مواقع ثقافية</div><div class="sw on"></div></div>
+        <div class="ly" onclick="toggleLy(this,'#c084fc','mountain')"><div class="ly-l"><div class="ly-dot" style="background:#c084fc"></div>جبال</div><div class="sw"></div></div>
+      </div>
+      <div class="layer-sec">
+        <p class="layer-sec-title">البنية التحتية</p>
+        <div class="ly on" onclick="toggleLy(this,'#38bdf8','hotel')"><div class="ly-l"><div class="ly-dot" style="background:#38bdf8"></div>فنادق</div><div class="sw on"></div></div>
+        <div class="ly" onclick="toggleLy(this,'#fb923c','transport')"><div class="ly-l"><div class="ly-dot" style="background:#fb923c"></div>نقل ومواصلات</div><div class="sw"></div></div>
+      </div>
+      <div class="layer-sec">
+        <p class="layer-sec-title">التحليل الجغرافي</p>
+        <div class="ly" onclick="toggleLy(this,'#a3e635','heatmap')"><div class="ly-l"><div class="ly-dot" style="background:#a3e635"></div>خريطة حرارية</div><div class="sw"></div></div>
+        <div class="ly" onclick="toggleLy(this,'#e879f9','wilaya')"><div class="ly-l"><div class="ly-dot" style="background:#e879f9"></div>حدود الولايات</div><div class="sw"></div></div>
+      </div>
+      <!-- Site panel -->
+      <div class="site-panel hidden" id="sitePanel">
+        <div class="sp-badge" id="spBadge">موقع تاريخي</div>
+        <div class="sp-name" id="spName">—</div>
+        <div class="sp-type" id="spType">—</div>
+        <div class="sp-score" id="spScore">—</div>
+        <div class="sp-row"><span>الولاية</span><span class="sp-val" id="spWilaya">—</span></div>
+        <div class="sp-row"><span>عدد الزوار / سنة</span><span class="sp-val" id="spVisitors">—</span></div>
+        <div class="sp-row"><span>قابلية الوصول</span><span class="sp-val" id="spAccess">—</span></div>
+        <div class="sp-row"><span>عدد الفنادق القريبة</span><span class="sp-val" id="spHotels">—</span></div>
+        <button class="sp-ai-btn" onclick="go('ai',document.querySelectorAll('.nt')[3])">✦ احصل على توصيات AI →</button>
+      </div>
+    </div>
+    <div class="map-main" id="mapMain">
+      <canvas class="map-canvas" id="mapCanvas"></canvas>
+      <div class="map-cats">
+        <div class="cat-pill on" onclick="setCat('all',this)">🌍 الكل</div>
+        <div class="cat-pill" onclick="setCat('history',this)">🏛️ تاريخية</div>
+        <div class="cat-pill" onclick="setCat('beach',this)">🏖️ شواطئ</div>
+        <div class="cat-pill" onclick="setCat('desert',this)">🌅 صحراء</div>
+        <div class="cat-pill" onclick="setCat('mountain',this)">⛰️ جبال</div>
+        <div class="cat-pill" onclick="setCat('hotel',this)">🏨 فنادق</div>
+      </div>
+      <div class="map-ctrl">
+        <div class="mc-btn" onclick="zoom(1.2)" title="تكبير">+</div>
+        <div class="mc-btn" onclick="zoom(0.83)" title="تصغير">−</div>
+        <div class="mc-btn" onclick="resetView()" title="إعادة تعيين">⌂</div>
+        <div class="mc-btn" onclick="go('analytics',document.querySelectorAll('.nt')[2])" title="التحليلات">📊</div>
+      </div>
+      <div class="map-status" id="mapStatus">58 ولاية · 2,847 موقع مرسوم</div>
+      <div class="map-legend">
+        <div class="leg-title">مفتاح الخريطة</div>
+        <div class="leg-item"><div class="leg-dot" style="background:#4dbb7a"></div>تاريخية</div>
+        <div class="leg-item"><div class="leg-dot" style="background:#60a5fa"></div>شواطئ</div>
+        <div class="leg-item"><div class="leg-dot" style="background:#fbbf24"></div>صحراء</div>
+        <div class="leg-item"><div class="leg-dot" style="background:#f87171"></div>ثقافية</div>
+        <div class="leg-item"><div class="leg-dot" style="background:#38bdf8"></div>فنادق</div>
+      </div>
+      <div class="map-tooltip" id="mtt">
+        <div class="tt-name" id="mttN"></div>
+        <div class="tt-meta" id="mttT"></div>
+        <div class="tt-score" id="mttS"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ ANALYTICS ═══ -->
+<div class="pg" id="pg-analytics">
+  <div class="dash">
+    <div class="dash-top">
+      <div class="dash-hdr"><h2>لوحة التحليلات السياحية</h2><p>بيانات حية عبر 58 ولاية — آخر تحديث: اليوم</p></div>
+      <div class="time-tabs">
+        <button class="tt-tab a" onclick="setTime('month',this)">شهر</button>
+        <button class="tt-tab" onclick="setTime('quarter',this)">ربع</button>
+        <button class="tt-tab" onclick="setTime('year',this)">سنة</button>
+      </div>
+    </div>
+    <div class="kpis">
+      <div class="kpi green"><div class="kpi-v g">2,847</div><div class="kpi-l">مواقع سياحية</div><div class="kpi-t up">↑ 12% سنوياً</div></div>
+      <div class="kpi"><div class="kpi-v">1,423</div><div class="kpi-l">فندق مسجل</div><div class="kpi-t up">↑ 8%</div></div>
+      <div class="kpi gold"><div class="kpi-v gold">7.6</div><div class="kpi-l">متوسط النقطة السياحية</div><div class="kpi-t up">↑ 0.4 نقطة</div></div>
+      <div class="kpi"><div class="kpi-v">68%</div><div class="kpi-l">مؤشر إمكانية الوصول</div><div class="kpi-t dn">↓ 2% عن الهدف</div></div>
+      <div class="kpi red"><div class="kpi-v r">8.4M</div><div class="kpi-l">زائر سنوي</div><div class="kpi-t up">↑ 18%</div></div>
+    </div>
+    <div class="dash-grid">
+      <div class="dc">
+        <h3>الفنادق حسب الولاية <span class="dc-badge">أعلى 8</span></h3>
+        <div id="hotBar"></div>
+      </div>
+      <div class="dc">
+        <h3>النقطة السياحية — خريطة كوروبليث <span class="dc-badge">58 ولاية</span></h3>
+        <div class="choro-wrap"><svg id="choroSvg" viewBox="0 0 400 220" style="width:100%;height:100%" xmlns="http://www.w3.org/2000/svg"></svg></div>
+        <div class="choro-legend"><span>منخفض</span><div class="choro-bar"></div><span>مرتفع</span></div>
+      </div>
+    </div>
+    <div class="dash-grid">
+      <div class="dc">
+        <h3>توزيع المواقع السياحية</h3>
+        <div class="pie-area">
+          <svg viewBox="0 0 120 120" style="width:110px;height:110px;flex-shrink:0" xmlns="http://www.w3.org/2000/svg">
+            <circle r="38" cx="60" cy="60" fill="none" stroke="#4dbb7a" stroke-width="19" stroke-dasharray="95 148" stroke-dashoffset="0" transform="rotate(-90 60 60)"/>
+            <circle r="38" cx="60" cy="60" fill="none" stroke="#60a5fa" stroke-width="19" stroke-dasharray="42 201" stroke-dashoffset="-95" transform="rotate(-90 60 60)"/>
+            <circle r="38" cx="60" cy="60" fill="none" stroke="#fbbf24" stroke-width="19" stroke-dasharray="28 215" stroke-dashoffset="-137" transform="rotate(-90 60 60)"/>
+            <circle r="38" cx="60" cy="60" fill="none" stroke="#f87171" stroke-width="19" stroke-dasharray="24 219" stroke-dashoffset="-165" transform="rotate(-90 60 60)"/>
+            <circle r="38" cx="60" cy="60" fill="none" stroke="rgba(255,255,255,.1)" stroke-width="19" stroke-dasharray="54 189" stroke-dashoffset="-189" transform="rotate(-90 60 60)"/>
+            <text x="60" y="58" text-anchor="middle" font-size="10" font-family="Outfit" fill="rgba(255,255,255,.6)" font-weight="600">2,847</text>
+            <text x="60" y="70" text-anchor="middle" font-size="7" font-family="Outfit" fill="rgba(255,255,255,.4)">موقع</text>
+          </svg>
+          <div class="pie-leg">
+            <div class="pi"><div class="pd" style="background:#4dbb7a"></div>تاريخية — 38%</div>
+            <div class="pi"><div class="pd" style="background:#60a5fa"></div>شواطئ — 17%</div>
+            <div class="pi"><div class="pd" style="background:#fbbf24"></div>صحراء — 11%</div>
+            <div class="pi"><div class="pd" style="background:#f87171"></div>ثقافية — 9%</div>
+            <div class="pi"><div class="pd" style="background:rgba(255,255,255,.15)"></div>أخرى — 25%</div>
+          </div>
+        </div>
+      </div>
+      <div class="dc">
+        <h3>اتجاه الزوار الشهري</h3>
+        <div class="trend-area" id="trendBars"></div>
+        <div style="display:flex;justify-content:space-between;font-size:.6rem;color:var(--dim);margin-top:4px">
+          <span>يناير</span><span>مارس</span><span>مايو</span><span>يوليو</span><span>سبتمبر</span><span>نوفمبر</span>
+        </div>
+      </div>
+    </div>
+    <!-- Wilaya comparison table -->
+    <div class="dc" style="margin-top:14px">
+      <h3>جدول مقارنة الولايات <span class="dc-badge">أعلى 10</span></h3>
+      <table class="compare-table" id="wilayaTable"></table>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ AI ═══ -->
+<div class="pg" id="pg-ai">
+  <div class="ai-page">
+    <h2>دليل السفر الذكي ✦</h2>
+    <p class="sub">خطط سفر مخصصة بالذكاء الاصطناعي — صف تفضيلاتك واحصل على مسار جزائري احترافي.</p>
+    <div class="pref-grid">
+      <div><p class="pl">الوجهة / المنطقة</p>
+        <select class="ps" id="pReg">
+          <option value="">كل الجزائر</option>
+          <option value="north">الشمال (الجزائر، بجاية، وهران)</option>
+          <option value="west">الغرب (تلمسان، معسكر، سيدي بلعباس)</option>
+          <option value="east">الشرق (قسنطينة، باتنة، عنابة)</option>
+          <option value="south">الجنوب (تمنراست، تيميمون، بشار)</option>
+          <option value="highlands">الهضاب العليا (سطيف، المسيلة، الجلفة)</option>
+        </select></div>
+      <div><p class="pl">الميزانية</p>
+        <select class="ps" id="pBudg">
+          <option value="budget">اقتصادية (أقل من 5000 دج / يوم)</option>
+          <option value="medium" selected>متوسطة (5000-15000 دج / يوم)</option>
+          <option value="luxury">فاخرة (أكثر من 15000 دج / يوم)</option>
+        </select></div>
+      <div><p class="pl">مدة الرحلة</p>
+        <select class="ps" id="pDur">
+          <option value="1">يوم واحد</option>
+          <option value="3" selected>3 أيام</option>
+          <option value="5">5 أيام</option>
+          <option value="7">أسبوع</option>
+          <option value="14">أسبوعان</option>
+        </select></div>
+      <div><p class="pl">أسلوب السفر</p>
+        <select class="ps" id="pStyle">
+          <option value="cultural">غمر ثقافي</option>
+          <option value="adventure" selected>مغامرة وطبيعة</option>
+          <option value="relaxation">استجمام وشواطئ</option>
+          <option value="historical">استكشاف تاريخي</option>
+          <option value="family">رحلة عائلية</option>
+        </select></div>
+    </div>
+    <p class="pl">الاهتمامات</p>
+    <div class="tag-row">
+      <button class="ptag s" onclick="tog(this)">🏛️ تاريخ</button>
+      <button class="ptag" onclick="tog(this)">🏔️ جبال</button>
+      <button class="ptag s" onclick="tog(this)">🌅 صحراء</button>
+      <button class="ptag" onclick="tog(this)">🏖️ شواطئ</button>
+      <button class="ptag" onclick="tog(this)">🎨 فن وثقافة</button>
+      <button class="ptag s" onclick="tog(this)">🍽️ مطبخ محلي</button>
+      <button class="ptag" onclick="tog(this)">🕌 عمارة إسلامية</button>
+      <button class="ptag" onclick="tog(this)">🌿 طبيعة</button>
+      <button class="ptag" onclick="tog(this)">🐪 صحراء كبرى</button>
+      <button class="ptag" onclick="tog(this)">🏺 آثار رومانية</button>
+      <button class="ptag" onclick="tog(this)">🏕️ تخييم</button>
+      <button class="ptag" onclick="tog(this)">📷 تصوير</button>
+    </div>
+    <p class="pl" style="margin-bottom:5px">ملاحظات إضافية (اختياري)</p>
+    <textarea class="extra-inp" id="pExtra" placeholder="مثال: أسافر مع عائلتي بما فيهم أطفال صغار. أحب الآثار الرومانية والثقافة الأمازيغية. أفضل الأجواء المعتدلة..."></textarea>
+    <button class="ai-go" id="aiGoBtn" onclick="getAI()">✦ أنشئ خطة سفري المخصصة</button>
+    <div class="ai-box" id="aiBox">
+      <div class="ai-box-hdr">
+        <div class="ai-badge-tag">✦ مُنشأة بالذكاء الاصطناعي</div>
+        <span style="font-size:.72rem;color:var(--muted)">مشغّل بـ Claude</span>
+      </div>
+      <div class="ai-content" id="aiContent"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ DECISION ═══ -->
+<div class="pg" id="pg-decision">
+  <div class="dec-page">
+    <h2>لوحة تحكم صانعي القرار</h2>
+    <p class="sub">استخبارات سياحية استراتيجية للمخططين والمستثمرين والجهات الحكومية</p>
+    <div class="opp-grid">
+      <div class="oc hi"><div class="oc-badge">إمكانية عالية</div><div class="oc-score">8.4</div><div class="oc-name">تيميمون</div><div class="oc-text">واحة صحراوية فريدة بقصور حمراء وطبيعة استثنائية. اهتمام دولي متصاعد بالمسارات الصحراوية. خدمات الإقامة لا تزال محدودة جداً مقارنة بالطلب.</div></div>
+      <div class="oc hi"><div class="oc-badge">إمكانية عالية</div><div class="oc-score">7.9</div><div class="oc-name">بجاية</div><div class="oc-text">شاطئ منطقة القبائل بجودة استثنائية. قاعدة سياحية قوية من الجاليات. البنية التحتية في طور التطوير — تحسين النفاذ البحري والبري ضرورة.</div></div>
+      <div class="oc me"><div class="oc-badge">إمكانية متوسطة</div><div class="oc-score">7.1</div><div class="oc-name">باتنة — تيمقاد</div><div class="oc-text">أطلال رومانية مدرجة في قائمة اليونسكو. جذب أثري قوي. نقص في مرشدين سياحيين وتسويق دولي. مراكز استقبال الزوار أولوية.</div></div>
+      <div class="oc me"><div class="oc-badge">إمكانية متوسطة</div><div class="oc-score">6.8</div><div class="oc-name">غرداية</div><div class="oc-text">وادي المزاب المدرج في التراث العالمي. عمارة وثقافة فريدة. النفاذ البري جيد. ربط جوي مباشر ضروري لاستقطاب الزوار الدوليين.</div></div>
+      <div class="oc lo"><div class="oc-badge">يحتاج تطوير</div><div class="oc-score">5.2</div><div class="oc-name">إليزي — جانت</div><div class="oc-text">حديقة التاسيلي ناجر — من أعظم الأصول الطبيعية الجزائرية. نائية جداً مع بنية تحتية شبه منعدمة. فرصة ذهبية للسياحة البيئية الفاخرة.</div></div>
+      <div class="oc lo"><div class="oc-badge">يحتاج تطوير</div><div class="oc-score">4.9</div><div class="oc-name">أدرار</div><div class="oc-text">مناظر الكثبان الرملية ومسالك القوافل التاريخية. بنية تحتية سياحية شبه معدومة. إمكانية استثمار في سياحة الاستكشاف الصحراوي الفاخر.</div></div>
+    </div>
+    <div class="dec-grid">
+      <div class="dec-card">
+        <h4>🚨 فجوات البنية التحتية</h4>
+        <div class="ir"><span>تيميمون — فنادق</span><span class="iv"><span class="badge b-r">حرجة</span></span></div>
+        <div class="ir"><span>جانت — طرق</span><span class="iv"><span class="badge b-r">حرجة</span></span></div>
+        <div class="ir"><span>أدرار — مطار</span><span class="iv"><span class="badge b-a">محدود</span></span></div>
+        <div class="ir"><span>بجاية — ميناء</span><span class="iv"><span class="badge b-a">محدود</span></span></div>
+        <div class="ir"><span>باتنة — مرشدون</span><span class="iv"><span class="badge b-a">محدود</span></span></div>
+        <div class="ir"><span>تلمسان — واي فاي</span><span class="iv"><span class="badge b-g">كافٍ</span></span></div>
+        <div class="ir"><span>الجزائر — فنادق</span><span class="iv"><span class="badge b-g">جيد</span></span></div>
+      </div>
+      <div class="dec-card">
+        <h4>📈 التنبؤ بالطلب — 12 شهراً</h4>
+        <div class="spark" id="decSpark"></div>
+        <div style="display:flex;justify-content:space-between;font-size:.62rem;color:var(--dim);margin-bottom:.7rem"><span>يونيو</span><span>سبتمبر</span><span>ديسمبر</span><span>مارس</span><span>يونيو</span></div>
+        <div style="display:flex;gap:12px;font-size:.72rem;color:var(--muted);margin-bottom:.8rem">
+          <div style="display:flex;align-items:center;gap:4px"><div style="width:9px;height:9px;border-radius:2px;background:rgba(0,98,51,.55)"></div>فعلي</div>
+          <div style="display:flex;align-items:center;gap:4px"><div style="width:9px;height:9px;border-radius:2px;background:rgba(77,187,122,.35);border:1px dashed rgba(77,187,122,.5)"></div>متوقع</div>
+        </div>
+        <div class="ai-insight"><strong>تحليل الذكاء الاصطناعي:</strong> من المتوقع أن يزداد الطلب السياحي بنسبة 23% بحلول الربع الثاني من 2026، مدفوعاً بمسارات السياحة الصحراوية. يُنصح باستثمار ذو أولوية في البنية التحتية للإيواء في تيميمون وجانت قبل موسم الذروة.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ COMPARE ═══ -->
+<div class="pg" id="pg-compare">
+  <div class="cmp-page">
+    <h2>مقارنة الولايات ⚖️</h2>
+    <p class="sub">قارن مؤشرات السياحة بين ولايتين جزائريتين بشكل تفصيلي</p>
+    <div class="cmp-sel-row">
+      <div class="cmp-sel-wrap">
+        <label>الولاية الأولى</label>
+        <select class="ps" id="cmpA" onchange="renderCompare()">
+          <option value="0">تلمسان</option><option value="1">الجزائر</option><option value="2">عنابة</option>
+          <option value="3">بجاية</option><option value="4">باتنة</option><option value="5">تيميمون</option>
+          <option value="6">غرداية</option><option value="7">قسنطينة</option>
+        </select>
+      </div>
+      <div class="cmp-sel-wrap">
+        <label>الولاية الثانية</label>
+        <select class="ps" id="cmpB" onchange="renderCompare()">
+          <option value="0">تلمسان</option><option value="1" selected>الجزائر</option><option value="2">عنابة</option>
+          <option value="3">بجاية</option><option value="4">باتنة</option><option value="5">تيميمون</option>
+          <option value="6">غرداية</option><option value="7">قسنطينة</option>
+        </select>
+      </div>
+      <button class="compare-btn" onclick="renderCompare()">مقارنة الآن</button>
+    </div>
+    <div class="cmp-cards" id="cmpCards"></div>
+    <div class="dc">
+      <h3>مخطط الرادار — المقارنة البصرية</h3>
+      <canvas id="radarCanvas" style="width:100%;height:280px;display:block"></canvas>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ GIS ═══ -->
+<div class="pg" id="pg-gis">
+  <div class="gis-page">
+    <h2>رفع بيانات GIS 📁</h2>
+    <p class="sub">استيراد GeoJSON من QGIS، رفع CSV، دمج البيانات، وحساب النقطة السياحية ديناميكياً</p>
+    <div class="up-grid">
+      <div class="uz" onclick="simUp('geo')">
+        <div class="uz-icon">🗺️</div>
+        <div class="uz-title">GeoJSON / QGIS</div>
+        <div class="uz-hint">اسحب وأفلت أو انقر هنا</div>
+        <div class="uz-hint" style="margin-top:4px;color:rgba(255,255,255,.2)">.geojson · .json · حدود، نقاط، مضلعات</div>
+      </div>
+      <div class="uz" onclick="simUp('csv')">
+        <div class="uz-icon">📊</div>
+        <div class="uz-title">ملف CSV</div>
+        <div class="uz-hint">اسحب وأفلت أو انقر هنا</div>
+        <div class="uz-hint" style="margin-top:4px;color:rgba(255,255,255,.2)">.csv · .tsv · فنادق، إحصاءات، تقييمات</div>
+      </div>
+    </div>
+    <div class="file-list" id="gisFiles">
+      <div class="fi"><div class="fi-icon fi-geo">GEO</div><div class="fi-name">algeria_wilayas_boundaries.geojson</div><div class="fi-size">2.4 MB · 58 عنصر</div><span class="badge b-g">محمّل</span></div>
+      <div class="fi"><div class="fi-icon fi-geo">GEO</div><div class="fi-name">tourist_sites_classified.geojson</div><div class="fi-size">1.1 MB · 2,847 نقطة</div><span class="badge b-g">محمّل</span></div>
+      <div class="fi"><div class="fi-icon fi-csv">CSV</div><div class="fi-name">hotel_inventory_2025.csv</div><div class="fi-size">380 KB · 1,423 سجل</div><span class="badge b-g">محمّل</span></div>
+    </div>
+    <!-- Score Calculator -->
+    <div class="score-box">
+      <h3>حاسبة النقطة السياحية</h3>
+      <p class="formula">NqSiyahiya = w₁·Sites + w₂·Hotels + w₃·Rating + w₄·Accessibility</p>
+      <div class="ts-formula">
+        <div class="tsf s"><div class="tsf-w g" id="twS">40%</div><div class="tsf-n">مواقع</div></div>
+        <div class="tsf h"><div class="tsf-w" style="color:var(--goldl)" id="twH">30%</div><div class="tsf-n">فنادق</div></div>
+        <div class="tsf r"><div class="tsf-w" style="color:#f87171" id="twR">20%</div><div class="tsf-n">تقييم</div></div>
+        <div class="tsf a"><div class="tsf-w" style="color:#60a5fa" id="twA">10%</div><div class="tsf-n">وصول</div></div>
+      </div>
+      <div class="sl-grid">
+        <div class="sl"><label>مواقع</label><input type="range" min="0" max="100" value="40" id="slS" oninput="calcScore()"/><span id="vlS">40</span>%</div>
+        <div class="sl"><label>فنادق</label><input type="range" min="0" max="100" value="30" id="slH" oninput="calcScore()"/><span id="vlH">30</span>%</div>
+        <div class="sl"><label>تقييم</label><input type="range" min="0" max="100" value="20" id="slR" oninput="calcScore()"/><span id="vlR">20</span>%</div>
+        <div class="sl"><label>وصول</label><input type="range" min="0" max="100" value="10" id="slA" oninput="calcScore()"/><span id="vlA">10</span>%</div>
+      </div>
+      <div class="ts-result">
+        <div><div class="ts-label">نقطة تلمسان النموذجية</div><div class="ts-val" id="tsVal">8.7</div></div>
+        <div style="text-align:right"><div class="ts-label">الترتيب بين 58 ولاية</div><div style="font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700;color:var(--goldl)">#3</div></div>
+      </div>
+      <!-- Wilaya scores table -->
+      <table class="wilaya-table" style="margin-top:1.3rem">
+        <thead><tr><th>الولاية</th><th>مواقع</th><th>فنادق</th><th>تقييم</th><th>وصول</th><th>النقطة</th></tr></thead>
+        <tbody id="wilayaScoreTable"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── PAGE NAV ──
+const pageIds=['land','map','analytics','ai','decision','compare','gis'];
+function go(id,btn){
+  pageIds.forEach(p=>{
+    const el=document.getElementById('pg-'+p);
+    if(el) el.classList.remove('a');
+  });
+  const el=document.getElementById('pg-'+id);
+  if(el) el.classList.add('a');
+  document.querySelectorAll('.nt').forEach(b=>b.classList.remove('a'));
+  if(btn) btn.classList.add('a');
+  if(id==='map') initMap();
+  if(id==='analytics') initAnalytics();
+  if(id==='decision') initDecision();
+  if(id==='compare') renderCompare();
+  if(id==='gis') initGIS();
+}
+
+// ── LANG ──
+function setLang(l,btn){document.querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('a'));btn.classList.add('a')}
+
+// ── COUNTER ANIMATION ──
+function animCount(id,target,suffix=''){
+  let v=0;const el=document.getElementById(id);
+  const step=target/60;
+  const iv=setInterval(()=>{v=Math.min(v+step,target);el.textContent=Math.round(v)+(suffix);if(v>=target)clearInterval(iv)},20);
+}
+setTimeout(()=>{animCount('cnt1',2847,'');animCount('cnt2',58,'');animCount('cnt3',8,'M')},300);
+
+// ── MAP ──
+const SITES=[
+  {x:.17,y:.19,name:'جامع منصورة التاريخي',type:'تاريخي',cat:'history',color:'#4dbb7a',score:8.7,wilaya:'تلمسان',visitors:'120,000',access:'جيد',hotels:24},
+  {x:.14,y:.17,name:'المسجد الكبير — تلمسان',type:'تاريخي',cat:'history',color:'#4dbb7a',score:8.9,wilaya:'تلمسان',visitors:'95,000',access:'ممتاز',hotels:24},
+  {x:.5,y:.14,name:'قصبة الجزائر',type:'تراث عالمي',cat:'history',color:'#4dbb7a',score:9.1,wilaya:'الجزائر',visitors:'450,000',access:'ممتاز',hotels:87},
+  {x:.8,y:.17,name:'شاطئ السرايدي',type:'شاطئ',cat:'beach',color:'#60a5fa',score:8.2,wilaya:'عنابة',visitors:'300,000',access:'جيد',hotels:42},
+  {x:.77,y:.19,name:'كورنيش عنابة',type:'شاطئ',cat:'beach',color:'#60a5fa',score:7.9,wilaya:'عنابة',visitors:'250,000',access:'جيد',hotels:42},
+  {x:.34,y:.79,name:'واحة تيميمون',type:'صحراء',cat:'desert',color:'#fbbf24',score:7.8,wilaya:'تيميمون',visitors:'45,000',access:'متوسط',hotels:8},
+  {x:.31,y:.82,name:'القصور الحمراء',type:'صحراء',cat:'desert',color:'#fbbf24',score:7.5,wilaya:'تيميمون',visitors:'38,000',access:'ضعيف',hotels:8},
+  {x:.61,y:.82,name:'هضبة تمنراست',type:'صحراء',cat:'desert',color:'#fbbf24',score:8.0,wilaya:'تمنراست',visitors:'60,000',access:'متوسط',hotels:12},
+  {x:.52,y:.51,name:'بني يزقن',type:'ثقافي',cat:'culture',color:'#f87171',score:7.4,wilaya:'غرداية',visitors:'80,000',access:'جيد',hotels:18},
+  {x:.51,y:.53,name:'مدينة غرداية القديمة',type:'تراث عالمي',cat:'culture',color:'#f87171',score:8.1,wilaya:'غرداية',visitors:'100,000',access:'جيد',hotels:18},
+  {x:.62,y:.2,name:'أطلال تيمقاد',type:'تاريخي',cat:'history',color:'#4dbb7a',score:9.3,wilaya:'باتنة',visitors:'180,000',access:'جيد',hotels:15},
+  {x:.21,y:.15,name:'شاطئ وهران',type:'شاطئ',cat:'beach',color:'#60a5fa',score:7.6,wilaya:'وهران',visitors:'500,000',access:'ممتاز',hotels:65},
+  {x:.48,y:.15,name:'فندق الأوراسي',type:'فندق',cat:'hotel',color:'#38bdf8',score:8.0,wilaya:'الجزائر',visitors:'—',access:'ممتاز',hotels:1},
+  {x:.45,y:.14,name:'فندق الهيلتون',type:'فندق',cat:'hotel',color:'#38bdf8',score:8.5,wilaya:'الجزائر',visitors:'—',access:'ممتاز',hotels:1},
+  {x:.37,y:.22,name:'شلالات الشريعة',type:'جبل',cat:'mountain',color:'#c084fc',score:7.9,wilaya:'البليدة',visitors:'200,000',access:'جيد',hotels:10},
+  {x:.57,y:.26,name:'جرجرة',type:'جبل',cat:'mountain',color:'#c084fc',score:8.4,wilaya:'تيزي وزو',visitors:'150,000',access:'متوسط',hotels:7},
+  {x:.44,y:.12,name:'تيبازة — آثار رومانية',type:'تاريخي',cat:'history',color:'#4dbb7a',score:8.8,wilaya:'تيبازة',visitors:'220,000',access:'ممتاز',hotels:20},
+];
+
+let mapScale=1,mapOffX=0,mapOffY=0,activeCat='all',mapReady=false;
+let hiddenCats=new Set();
+
+function initMap(){
+  if(mapReady)return;
+  mapReady=true;
+  const canvas=document.getElementById('mapCanvas');
+  const main=document.getElementById('mapMain');
+  canvas.width=main.clientWidth||700;
+  canvas.height=main.clientHeight||500;
+  drawMap();
+  canvas.addEventListener('mousemove',onMapMove);
+  canvas.addEventListener('click',onMapClick);
+  canvas.addEventListener('wheel',e=>{e.preventDefault();zoom(e.deltaY<0?1.15:.87,e.offsetX,e.offsetY)},{passive:false});
+}
+
+function drawMap(){
+  const canvas=document.getElementById('mapCanvas');
+  if(!canvas)return;
+  const ctx=canvas.getContext('2d');
+  const W=canvas.width,H=canvas.height;
+  ctx.clearRect(0,0,W,H);
+  ctx.save();
+  ctx.translate(mapOffX,mapOffY);
+  ctx.scale(mapScale,mapScale);
+
+  // Background gradient
+  const bg=ctx.createRadialGradient(W/2,H/2,0,W/2,H/2,W*.7);
+  bg.addColorStop(0,'#0d1a10');bg.addColorStop(1,'#071009');
+  ctx.fillStyle=bg;ctx.fillRect(-mapOffX/mapScale,-mapOffY/mapScale,W/mapScale,H/mapScale);
+
+  // Algeria outline (simplified)
+  const pts=[[.1,.11],[.2,.05],[.33,.04],[.5,.03],[.65,.04],[.78,.07],[.9,.12],[.95,.18],[.93,.28],[.9,.38],[.87,.5],[.85,.6],[.82,.7],[.78,.82],[.72,.9],[.62,.95],[.5,.97],[.38,.95],[.28,.9],[.2,.83],[.14,.72],[.1,.6],[.08,.48],[.07,.35],[.08,.24]];
+  ctx.beginPath();
+  pts.forEach((p,i)=>{const m=i===0?'moveTo':'lineTo';ctx[m](p[0]*W,p[1]*H)});
+  ctx.closePath();
+  ctx.fillStyle='rgba(0,98,51,0.06)';ctx.fill();
+  ctx.strokeStyle='rgba(0,98,51,0.3)';ctx.lineWidth=1.5/mapScale;ctx.stroke();
+
+  // Grid
+  for(let x=0;x<1;x+=.25){ctx.beginPath();ctx.moveTo(x*W,0);ctx.lineTo(x*W,H);ctx.strokeStyle='rgba(255,255,255,.03)';ctx.lineWidth=1/mapScale;ctx.stroke()}
+  for(let y=0;y<1;y+=.2){ctx.beginPath();ctx.moveTo(0,y*H);ctx.lineTo(W,y*H);ctx.strokeStyle='rgba(255,255,255,.03)';ctx.lineWidth=1/mapScale;ctx.stroke()}
+
+  // Heat zones
+  const heat=[{x:.5,y:.14,r:.08},{x:.17,y:.17,r:.06},{x:.79,y:.18,r:.06},{x:.52,y:.52,r:.05}];
+  heat.forEach(h=>{
+    const g=ctx.createRadialGradient(h.x*W,h.y*H,0,h.x*W,h.y*H,h.r*W);
+    g.addColorStop(0,'rgba(0,98,51,.25)');g.addColorStop(1,'rgba(0,98,51,0)');
+    ctx.fillStyle=g;ctx.beginPath();ctx.arc(h.x*W,h.y*H,h.r*W,0,Math.PI*2);ctx.fill();
+  });
+
+  // Wilaya labels
+  const lbls=[{x:.17,y:.19,n:'تلمسان'},{x:.5,y:.14,n:'الجزائر'},{x:.79,y:.18,n:'عنابة'},{x:.52,y:.52,n:'غرداية'},{x:.34,y:.79,n:'تيميمون'},{x:.61,y:.82,n:'تمنراست'},{x:.62,y:.2,n:'باتنة'}];
+  ctx.fillStyle='rgba(255,255,255,.22)';ctx.font=`${Math.max(9,10/mapScale)}px Outfit`;ctx.textAlign='center';
+  lbls.forEach(l=>ctx.fillText(l.n,l.x*W,l.y*H+22));
+
+  // Markers
+  SITES.forEach(s=>{
+    if(activeCat!=='all'&&s.cat!==activeCat)return;
+    if(hiddenCats.has(s.cat))return;
+    const sx=s.x*W,sy=s.y*H;
+    // Pulse
+    ctx.beginPath();ctx.arc(sx,sy,12/mapScale,0,Math.PI*2);
+    ctx.fillStyle=s.color.replace(')',',0.15)').replace('rgb','rgba')||'rgba(77,187,122,0.15)';
+    ctx.fill();
+    // Circle
+    ctx.beginPath();ctx.arc(sx,sy,6/mapScale,0,Math.PI*2);
+    ctx.fillStyle=s.color;ctx.fill();
+    ctx.strokeStyle='rgba(255,255,255,.7)';ctx.lineWidth=1.5/mapScale;ctx.stroke();
+  });
+  ctx.restore();
+}
+
+function onMapMove(e){
+  const canvas=document.getElementById('mapCanvas');
+  const W=canvas.width,H=canvas.height;
+  const mx=(e.offsetX-mapOffX)/mapScale;
+  const my=(e.offsetY-mapOffY)/mapScale;
+  let found=null;
+  SITES.forEach(s=>{
+    if(activeCat!=='all'&&s.cat!==activeCat)return;
+    if(hiddenCats.has(s.cat))return;
+    const dx=s.x*W-mx,dy=s.y*H-my;
+    if(Math.sqrt(dx*dx+dy*dy)<14/mapScale)found=s;
+  });
+  const tt=document.getElementById('mtt');
+  if(found){
+    document.getElementById('mttN').textContent=found.name;
+    document.getElementById('mttT').textContent=found.type+' · '+found.wilaya;
+    document.getElementById('mttS').textContent='النقطة السياحية: '+found.score+'/10';
+    tt.style.left=(e.offsetX+14)+'px';tt.style.top=(e.offsetY-14)+'px';
+    tt.classList.add('show');
+    canvas.style.cursor='pointer';
+  }else{tt.classList.remove('show');canvas.style.cursor='crosshair';}
+}
+function onMapClick(e){
+  const canvas=document.getElementById('mapCanvas');
+  const W=canvas.width,H=canvas.height;
+  const mx=(e.offsetX-mapOffX)/mapScale,my=(e.offsetY-mapOffY)/mapScale;
+  let found=null;
+  SITES.forEach(s=>{
+    const dx=s.x*W-mx,dy=s.y*H-my;
+    if(Math.sqrt(dx*dx+dy*dy)<14/mapScale)found=s;
+  });
+  if(found)selectSite(found);
+}
+function selectSite(s){
+  document.getElementById('sitePanel').classList.remove('hidden');
+  document.getElementById('spBadge').textContent=s.type;
+  document.getElementById('spName').textContent=s.name;
+  document.getElementById('spType').textContent=s.cat==='hotel'?'فندق':'موقع '+s.type;
+  document.getElementById('spScore').textContent=s.score;
+  document.getElementById('spWilaya').textContent=s.wilaya;
+  document.getElementById('spVisitors').textContent=s.visitors;
+  document.getElementById('spAccess').textContent=s.access;
+  document.getElementById('spHotels').textContent=s.hotels;
+}
+function zoom(f,cx,cy){
+  const canvas=document.getElementById('mapCanvas');
+  cx=cx||canvas.width/2;cy=cy||canvas.height/2;
+  mapOffX=cx-(cx-mapOffX)*f;
+  mapOffY=cy-(cy-mapOffY)*f;
+  mapScale*=f;
+  drawMap();
+}
+function resetView(){mapScale=1;mapOffX=0;mapOffY=0;drawMap();}
+function setCat(c,btn){
+  activeCat=c;
+  document.querySelectorAll('.cat-pill').forEach(p=>p.classList.remove('on'));
+  btn.classList.add('on');
+  drawMap();
+}
+function toggleLy(el,color,cat){
+  el.classList.toggle('on');
+  el.querySelector('.sw').classList.toggle('on');
+  if(hiddenCats.has(cat))hiddenCats.delete(cat);else hiddenCats.add(cat);
+  drawMap();
+}
+function filterSites(q){
+  const ql=q.toLowerCase();
+  const found=SITES.find(s=>s.name.includes(ql)||s.wilaya.includes(ql));
+  if(found)selectSite(found);
+}
+
+// ── ANALYTICS ──
+const wilayas=[
+  {n:'الجزائر',hotels:312,sites:420,rating:8.5,access:95,score:8.9},
+  {n:'وهران',hotels:187,sites:210,rating:8.1,access:88,score:8.3},
+  {n:'عنابة',hotels:143,sites:180,rating:7.9,access:82,score:7.8},
+  {n:'قسنطينة',hotels:128,sites:165,rating:7.7,access:79,score:7.6},
+  {n:'تلمسان',hotels:94,sites:142,rating:8.7,access:75,score:8.7},
+  {n:'بجاية',hotels:87,sites:130,rating:7.8,access:70,score:7.4},
+  {n:'باتنة',hotels:72,sites:118,rating:7.5,access:68,score:7.2},
+  {n:'سطيف',hotels:65,sites:105,rating:7.2,access:72,score:7.0},
+  {n:'غرداية',hotels:40,sites:95,rating:8.2,access:65,score:7.5},
+  {n:'تيميمون',hotels:8,sites:60,rating:7.8,access:30,score:5.8},
+];
+function initAnalytics(){
+  // Hotels bar
+  const hb=document.getElementById('hotBar');
+  if(hb.children.length)return;
+  const max=312;
+  hb.innerHTML=wilayas.slice(0,8).map(w=>`
+    <div class="brow"><span class="bn">${w.n}</span><div class="bt"><div class="bf" style="width:0%;background:linear-gradient(to right,var(--g),var(--gl))" data-w="${Math.round(w.hotels/max*100)}"></div></div><span class="bv">${w.hotels}</span></div>`).join('');
+  setTimeout(()=>{document.querySelectorAll('.bf').forEach(b=>{b.style.width=b.dataset.w+'%'})},100);
+  // Choropleth
+  const svg=document.getElementById('choroSvg');
+  const blocks=[
+    {x:8,y:5,w:55,h:32,s:.92,n:'الجزائر'},{x:66,y:5,w:50,h:32,s:.85,n:'وهران'},{x:119,y:5,w:48,h:32,s:.70,n:'تيزي وزو'},
+    {x:170,y:5,w:55,h:32,s:.95,n:'العاصمة'},{x:228,y:5,w:50,h:32,s:.72,n:'سطيف'},{x:281,y:5,w:52,h:32,s:.88,n:'قسنطينة'},{x:336,y:5,w:55,h:32,s:.82,n:'عنابة'},
+    {x:8,y:42,w:60,h:38,s:.55,n:'البيض'},{x:71,y:42,w:55,h:38,s:.60,n:'الأغواط'},{x:129,y:42,w:55,h:38,s:.48,n:'المسيلة'},{x:187,y:42,w:55,h:38,s:.65,n:'باتنة'},{x:245,y:42,w:58,h:38,s:.80,n:'عنابة'},{x:306,y:42,w:50,h:38,s:.50,n:'تبسة'},{x:359,y:42,w:32,h:38,s:.44,n:'أخرى'},
+    {x:8,y:85,w:75,h:45,s:.72,n:'تيميمون'},{x:86,y:85,w:65,h:45,s:.42,n:'غرداية'},{x:154,y:85,w:65,h:45,s:.38,n:'ورقلة'},{x:222,y:85,w:70,h:45,s:.35,n:'إليزي'},{x:295,y:85,w:96,h:45,s:.30,n:'تمنراست'},
+    {x:8,y:135,w:85,h:55,s:.45,n:'أدرار'},{x:96,y:135,w:90,h:55,s:.40,n:'تمنراست'},{x:189,y:135,w:110,h:55,s:.28,n:'جانت'},
+  ];
+  svg.innerHTML=blocks.map(b=>{
+    const g=Math.round(40+b.s*160);
+    return `<g><rect x="${b.x}" y="${b.y}" width="${b.w}" height="${b.h}" rx="2" fill="rgba(0,${g},${Math.round(g*.4)},${.12+b.s*.55})" stroke="rgba(255,255,255,0.07)" stroke-width=".5"/><text x="${b.x+b.w/2}" y="${b.y+b.h/2+3}" text-anchor="middle" font-family="Outfit" font-size="7" fill="rgba(255,255,255,${.35+b.s*.45})">${b.n}</text></g>`;
+  }).join('');
+  // Trend bars
+  const tb=document.getElementById('trendBars');
+  if(!tb.children.length){
+    const vals=[45,52,68,78,88,100,95,90,72,58,48,40];
+    vals.forEach((v,i)=>{
+      const w=document.createElement('div');w.className='tb-wrap';
+      const bar=document.createElement('div');bar.className='tb'+(v>=88?' peak':'');
+      bar.style.height='0%';bar.style.flex='1';
+      const lbl=document.createElement('div');lbl.className='tb-l';
+      lbl.textContent=['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'][i].slice(0,3);
+      w.appendChild(bar);w.appendChild(lbl);tb.appendChild(w);
+      setTimeout(()=>{bar.style.height=v+'%';bar.style.transition='height .8s ease'},200+i*40);
+    });
+  }
+  // Table
+  const t=document.getElementById('wilayaTable');
+  if(!t.innerHTML){
+    t.innerHTML=`<thead><tr><th>الولاية</th><th>فنادق</th><th>مواقع</th><th>تقييم</th><th>وصول</th><th>النقطة</th></tr></thead><tbody>${
+      wilayas.slice(0,10).map(w=>`<tr><td><strong>${w.n}</strong></td><td>${w.hotels}</td><td>${w.sites}</td><td>⭐ ${w.rating}</td><td>${w.access}%</td><td><span class="score-pill ${w.score>=8?'sp-high':w.score>=7?'sp-med':'sp-low'}">${w.score}</span></td></tr>`).join('')
+    }</tbody>`;
+  }
+}
+
+// ── AI ──
+function tog(btn){btn.classList.toggle('s')}
+async function getAI(){
+  const btn=document.getElementById('aiGoBtn');
+  const box=document.getElementById('aiBox');
+  const content=document.getElementById('aiContent');
+  const reg=document.getElementById('pReg').value||'كل الجزائر';
+  const budg=document.getElementById('pBudg').value;
+  const dur=document.getElementById('pDur').value;
+  const style=document.getElementById('pStyle').value;
+  const extra=document.getElementById('pExtra').value;
+  const interests=Array.from(document.querySelectorAll('.ptag.s')).map(t=>t.textContent.trim()).join('، ');
+  btn.disabled=true;btn.textContent='✦ جارٍ إنشاء خطة سفرك...';
+  box.classList.add('show');content.textContent='● ● ●';
+  const prompt=`أنت STAA، مساعد السياحة الذكي للجزائر. أنشئ خطة سفر تفصيلية باللغة العربية بناءً على هذه التفضيلات:
+- المنطقة: ${reg}
+- الميزانية: ${budg}
+- المدة: ${dur} يوم/أيام
+- أسلوب السفر: ${style}
+- الاهتمامات: ${interests||'عامة'}
+- ملاحظات: ${extra||'لا شيء'}
+
+أنشئ خطة يوم بيوم بمواقع جزائرية حقيقية، نصائح عملية، معلومات ثقافية، وتكاليف تقريبية بالدينار الجزائري. اذكر مطاعم محلية، وسائل النقل، وأفضل أوقات الزيارة. استخدم تنسيق اليوم 1:، اليوم 2: إلخ. كن محدداً ومفصلاً. لا تتجاوز 450 كلمة.`;
+  try{
+    const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,messages:[{role:'user',content:prompt}]})});
+    const d=await r.json();
+    const txt=d.content?.map(b=>b.text||'').join('')||'تعذّر إنشاء التوصية. حاول مجدداً.';
+    content.textContent='';let i=0;
+    const iv=setInterval(()=>{content.textContent+=txt[i]||'';i++;if(i>=txt.length)clearInterval(iv)},10);
+  }catch(e){
+    content.textContent='مثال على خطة سفر:\n\nاليوم 1: تلمسان التاريخية\n• صباحاً: زيارة المسجد الكبير والمئذنة الكبرى\n• ظهراً: أطلال منصورة والضريح الملكي\n• مساءً: التجول في السوق القديمة وتذوق "البريك التلمساني"\n• الإقامة: فندق زيانيد ★★★ — 6,500 دج/ليلة\n\nاليوم 2: طبيعة وجبال\n• رحلة إلى الحديقة الوطنية لتلمسان\n• شلالات واد الورد\n• غداء في قرية أمازيغية أصيلة\n\nاليوم 3: البوابة الصحراوية\n• التوجه نحو النعامة وعين الصفراء\n• ركوب الجمال عند غروب الشمس\n• نوم في خيمة صحراوية';
+  }
+  btn.disabled=false;btn.textContent='✦ أنشئ خطة سفري المخصصة';
+}
+
+// ── DECISION ──
+function initDecision(){
+  const sp=document.getElementById('decSpark');
+  if(sp&&!sp.children.length){
+    const act=[75,88,100,82,72,68,90,95];const pred=[88,94,92,78,96,102];
+    const all=[...act,...pred];const mx=Math.max(...all);
+    act.forEach(v=>{const d=document.createElement('div');d.className='sp';d.style.height=Math.round(v/mx*100)+'%';sp.appendChild(d)});
+    pred.forEach(v=>{const d=document.createElement('div');d.className='sp pred';d.style.height=Math.round(v/mx*100)+'%';sp.appendChild(d)});
+  }
+}
+
+// ── COMPARE ──
+function renderCompare(){
+  const iA=+document.getElementById('cmpA').value;
+  const iB=+document.getElementById('cmpB').value;
+  const wA=wilayas[iA],wB=wilayas[iB];
+  const cards=document.getElementById('cmpCards');
+  function cardHTML(w,color){
+    return `<div class="cmp-card"><h3 style="color:${color}">${w.n}</h3>
+      <div class="cmp-metric"><span>الفنادق</span><span class="cmp-val">${w.hotels}</span></div>
+      <div class="cmp-metric"><span>المواقع السياحية</span><span class="cmp-val">${w.sites}</span></div>
+      <div class="cmp-metric"><span>متوسط التقييم</span><span class="cmp-val">⭐ ${w.rating}</span></div>
+      <div class="cmp-metric"><span>مؤشر الوصول</span><span class="cmp-val">${w.access}%</span></div>
+      <div class="cmp-metric"><span>النقطة السياحية</span><span class="cmp-val"><span class="score-pill ${w.score>=8?'sp-high':w.score>=7?'sp-med':'sp-low'}">${w.score}</span></span></div>
+    </div>`;
+  }
+  cards.innerHTML=cardHTML(wA,'#4dbb7a')+cardHTML(wB,'#60a5fa');
+  drawRadar(wA,wB);
+}
+function drawRadar(wA,wB){
+  const canvas=document.getElementById('radarCanvas');
+  if(!canvas)return;
+  canvas.width=canvas.parentElement.clientWidth||400;
+  canvas.height=280;
+  const ctx=canvas.getContext('2d');
+  const W=canvas.width,H=canvas.height;
+  ctx.clearRect(0,0,W,H);
+  const cx=W/2,cy=H/2,r=Math.min(W,H)*.38;
+  const labels=['فنادق','مواقع','تقييم','وصول','النقطة'];
+  const maxVals=[312,420,10,100,10];
+  const vA=[wA.hotels,wA.sites,wA.rating,wA.access,wA.score];
+  const vB=[wB.hotels,wB.sites,wB.rating,wB.access,wB.score];
+  const n=labels.length;
+  // Grid
+  for(let ring=1;ring<=4;ring++){
+    ctx.beginPath();
+    for(let i=0;i<n;i++){
+      const a=i/n*Math.PI*2-Math.PI/2;
+      const rr=r*ring/4;
+      const x=cx+Math.cos(a)*rr,y=cy+Math.sin(a)*rr;
+      i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+    }
+    ctx.closePath();ctx.strokeStyle='rgba(255,255,255,.08)';ctx.lineWidth=1;ctx.stroke();
+  }
+  // Axes
+  for(let i=0;i<n;i++){
+    const a=i/n*Math.PI*2-Math.PI/2;
+    ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(cx+Math.cos(a)*r,cy+Math.sin(a)*r);
+    ctx.strokeStyle='rgba(255,255,255,.1)';ctx.lineWidth=1;ctx.stroke();
+    ctx.fillStyle='rgba(255,255,255,.5)';ctx.font='11px Outfit';ctx.textAlign='center';
+    ctx.fillText(labels[i],cx+Math.cos(a)*(r+22),cy+Math.sin(a)*(r+22)+4);
+  }
+  function drawPoly(vals,color,fill){
+    ctx.beginPath();
+    vals.forEach((v,i)=>{
+      const a=i/n*Math.PI*2-Math.PI/2;
+      const rr=r*(v/maxVals[i]);
+      const x=cx+Math.cos(a)*rr,y=cy+Math.sin(a)*rr;
+      i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+    });
+    ctx.closePath();ctx.fillStyle=fill;ctx.fill();ctx.strokeStyle=color;ctx.lineWidth=2;ctx.stroke();
+  }
+  drawPoly(vA,'#4dbb7a','rgba(77,187,122,0.15)');
+  drawPoly(vB,'#60a5fa','rgba(96,165,250,0.15)');
+  // Legend
+  ctx.fillStyle='#4dbb7a';ctx.fillRect(cx-60,H-20,10,10);
+  ctx.fillStyle='rgba(255,255,255,.6)';ctx.font='11px Outfit';ctx.textAlign='left';
+  ctx.fillText(wA.n,cx-46,H-11);
+  ctx.fillStyle='#60a5fa';ctx.fillRect(cx+10,H-20,10,10);
+  ctx.fillStyle='rgba(255,255,255,.6)';ctx.fillText(wB.n,cx+24,H-11);
+}
+
+// ── GIS ──
+function initGIS(){
+  const tbody=document.getElementById('wilayaScoreTable');
+  if(tbody&&!tbody.innerHTML){
+    tbody.innerHTML=wilayas.map(w=>`<tr>
+      <td>${w.n}</td>
+      <td>${w.sites}<div class="mini-bar" style="width:${Math.round(w.sites/420*60)}px;background:#4dbb7a"></div></td>
+      <td>${w.hotels}<div class="mini-bar" style="width:${Math.round(w.hotels/312*60)}px;background:var(--goldl)"></div></td>
+      <td>${w.rating}</td>
+      <td>${w.access}%</td>
+      <td><span class="score-pill ${w.score>=8?'sp-high':w.score>=7?'sp-med':'sp-low'}">${w.score}</span></td>
+    </tr>`).join('');
+  }
+}
+function simUp(type){
+  const list=document.getElementById('gisFiles');
+  const nm=type==='geo'?`layer_${Date.now()}.geojson`:`data_${Date.now()}.csv`;
+  const div=document.createElement('div');div.className='fi';
+  div.innerHTML=`<div class="fi-icon fi-${type==='geo'?'geo':'csv'}">${type==='geo'?'GEO':'CSV'}</div><div class="fi-name">${nm}</div><div class="fi-size">جارٍ الرفع...</div><span class="badge b-a">يُرفع</span>`;
+  list.appendChild(div);
+  setTimeout(()=>{div.querySelector('.fi-size').textContent=Math.round(Math.random()*900+100)+' KB';div.querySelector('.badge').className='badge b-g';div.querySelector('.badge').textContent='محمّل';},1800);
+}
+function calcScore(){
+  const s=+document.getElementById('slS').value,h=+document.getElementById('slH').value,r=+document.getElementById('slR').value,a=+document.getElementById('slA').value;
+  ['S','H','R','A'].forEach((k,i)=>{const v=[s,h,r,a][i];document.getElementById('vl'+k).textContent=v;document.getElementById('tw'+k).textContent=v+'%'});
+  const total=s+h+r+a;
+  const score=total>0?((s/total)*9.4+(h/total)*7.8+(r/total)*8.6+(a/total)*7.2).toFixed(1):'0.0';
+  document.getElementById('tsVal').textContent=score;
+}
+
+// ── INIT ──
+setTimeout(()=>{
+  initMap();
+  initAnalytics();
+  initDecision();
+  renderCompare();
+  initGIS();
+},600);
+</script>
