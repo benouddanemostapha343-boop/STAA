@@ -1,0 +1,140 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #07111d;
+  --bg2: #0d1b2a;
+  --bg3: #111f30;
+  --green: #00c851;
+  --green-light: #00e85f;
+  --gold: #ffbb33;
+  --gold-light: #ffd166;
+  --glass: rgba(255, 255, 255, 0.04);
+  --glass2: rgba(255, 255, 255, 0.08);
+  --glass3: rgba(255, 255, 255, 0.12);
+  --border: rgba(255, 255, 255, 0.08);
+  --border2: rgba(255, 255, 255, 0.15);
+  --muted: rgba(255, 255, 255, 0.5);
+  --dim: rgba(255, 255, 255, 0.3);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: #fff;
+  font-family: 'DM Sans', sans-serif;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+::-webkit-scrollbar { width: 3px; height: 3px; }
+::-webkit-scrollbar-thumb { background: rgba(0, 200, 81, 0.3); border-radius: 2px; }
+::-webkit-scrollbar-track { background: transparent; }
+
+.font-display { font-family: 'Playfair Display', serif; }
+
+/* Glassmorphism card */
+.glass-card {
+  background: var(--glass);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+/* Glow effects */
+.glow-green { box-shadow: 0 0 20px rgba(0, 200, 81, 0.2); }
+.glow-gold { box-shadow: 0 0 20px rgba(255, 187, 51, 0.2); }
+
+/* Animated gradient border */
+.gradient-border {
+  position: relative;
+  background: var(--bg2);
+  border-radius: 16px;
+}
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: 16px;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(0,200,81,0.4), rgba(255,187,51,0.2), rgba(0,200,81,0.1));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Score pill colors */
+.score-high { color: #00c851; background: rgba(0,200,81,0.12); border: 1px solid rgba(0,200,81,0.3); }
+.score-mid { color: #ffbb33; background: rgba(255,187,51,0.12); border: 1px solid rgba(255,187,51,0.3); }
+.score-low-mid { color: #ff8800; background: rgba(255,136,0,0.12); border: 1px solid rgba(255,136,0,0.3); }
+.score-low { color: #ff4444; background: rgba(255,68,68,0.12); border: 1px solid rgba(255,68,68,0.3); }
+
+/* Leaflet overrides */
+.leaflet-container { background: #07111d !important; }
+.leaflet-popup-content-wrapper {
+  background: #0d1b2a !important;
+  border: 1px solid rgba(255,255,255,0.1) !important;
+  border-radius: 12px !important;
+  color: #fff !important;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4) !important;
+}
+.leaflet-popup-tip { background: #0d1b2a !important; }
+.leaflet-popup-close-button { color: rgba(255,255,255,0.5) !important; }
+.leaflet-popup-close-button:hover { color: #fff !important; }
+.leaflet-control-zoom a {
+  background: rgba(13,27,42,0.95) !important;
+  border-color: rgba(255,255,255,0.1) !important;
+  color: rgba(255,255,255,0.7) !important;
+}
+.leaflet-control-zoom a:hover {
+  background: rgba(0,200,81,0.2) !important;
+  color: #fff !important;
+}
+.leaflet-control-attribution { display: none !important; }
+
+/* Animations */
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.8); }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+.animate-float { animation: float 4s ease-in-out infinite; }
+.animate-pulse-dot { animation: pulse-dot 1.5s ease-in-out infinite; }
+
+/* Noise texture overlay */
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1000;
+  opacity: 0.02;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+/* Page transition */
+.page-enter { opacity: 0; transform: translateY(12px); }
+.page-enter-active { opacity: 1; transform: translateY(0); transition: all 0.35s ease; }
+
+/* Mobile */
+@media (max-width: 768px) {
+  .map-layout { grid-template-columns: 1fr !important; }
+  .sidebar-mobile-hide { display: none !important; }
+}
