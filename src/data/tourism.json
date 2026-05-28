@@ -1,0 +1,22 @@
+[
+  { "id": 1, "name": "Alger", "region": "North", "hotels": 312, "sites": 420, "rating": 4.6, "accessibility": 95, "types": ["Historical","Culture","Beach"] },
+  { "id": 2, "name": "Oran", "region": "North", "hotels": 198, "sites": 280, "rating": 4.4, "accessibility": 88, "types": ["Beach","Culture","Historical"] },
+  { "id": 3, "name": "Constantine", "region": "East", "hotels": 145, "sites": 320, "rating": 4.7, "accessibility": 82, "types": ["Historical","Culture"] },
+  { "id": 4, "name": "Annaba", "region": "East", "hotels": 120, "sites": 180, "rating": 4.3, "accessibility": 80, "types": ["Beach","Historical"] },
+  { "id": 5, "name": "Tlemcen", "region": "North", "hotels": 95, "sites": 260, "rating": 4.8, "accessibility": 75, "types": ["Historical","Culture"] },
+  { "id": 6, "name": "Tamanrasset", "region": "South", "hotels": 42, "sites": 380, "rating": 4.9, "accessibility": 45, "types": ["Desert","Adventure"] },
+  { "id": 7, "name": "Ghardaïa", "region": "South", "hotels": 68, "sites": 290, "rating": 4.6, "accessibility": 60, "types": ["Historical","Desert","Culture"] },
+  { "id": 8, "name": "Béjaïa", "region": "East", "hotels": 88, "sites": 210, "rating": 4.5, "accessibility": 78, "types": ["Beach","Mountains"] },
+  { "id": 9, "name": "Tizi Ouzou", "region": "North", "hotels": 76, "sites": 195, "rating": 4.4, "accessibility": 72, "types": ["Mountains","Culture"] },
+  { "id": 10, "name": "Sétif", "region": "East", "hotels": 92, "sites": 230, "rating": 4.3, "accessibility": 79, "types": ["Historical","Culture"] },
+  { "id": 11, "name": "Biskra", "region": "South", "hotels": 55, "sites": 175, "rating": 4.2, "accessibility": 65, "types": ["Desert","Beach"] },
+  { "id": 12, "name": "Batna", "region": "East", "hotels": 70, "sites": 200, "rating": 4.1, "accessibility": 70, "types": ["Historical","Mountains"] },
+  { "id": 13, "name": "Blida", "region": "North", "hotels": 84, "sites": 160, "rating": 4.0, "accessibility": 85, "types": ["Mountains","Culture"] },
+  { "id": 14, "name": "Médéa", "region": "Center", "hotels": 48, "sites": 140, "rating": 3.9, "accessibility": 68, "types": ["Historical","Mountains"] },
+  { "id": 15, "name": "Mostaganem", "region": "North", "hotels": 62, "sites": 155, "rating": 4.2, "accessibility": 74, "types": ["Beach","Historical"] },
+  { "id": 16, "name": "Ouargla", "region": "South", "hotels": 45, "sites": 165, "rating": 4.0, "accessibility": 55, "types": ["Desert","Historical"] },
+  { "id": 17, "name": "Adrar", "region": "South", "hotels": 28, "sites": 220, "rating": 4.5, "accessibility": 35, "types": ["Desert","Adventure"] },
+  { "id": 18, "name": "Djelfa", "region": "Center", "hotels": 38, "sites": 130, "rating": 3.8, "accessibility": 62, "types": ["Historical","Desert"] },
+  { "id": 19, "name": "Skikda", "region": "East", "hotels": 55, "sites": 145, "rating": 4.0, "accessibility": 72, "types": ["Beach","Historical"] },
+  { "id": 20, "name": "Jijel", "region": "East", "hotels": 48, "sites": 160, "rating": 4.3, "accessibility": 70, "types": ["Beach","Mountains"] }
+]
