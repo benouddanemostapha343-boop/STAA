@@ -1,0 +1,56 @@
+{
+  "type": "FeatureCollection",
+  "name": "algeria_wilayas",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": { "name": "Alger", "Hotels": 312, "sites": 420, "rating": 4.6, "accessibility": 95 },
+      "geometry": { "type": "Polygon", "coordinates": [[[2.8,36.5],[3.3,36.5],[3.3,36.9],[2.8,36.9],[2.8,36.5]]] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Oran", "Hotels": 198, "sites": 280, "rating": 4.4, "accessibility": 88 },
+      "geometry": { "type": "Polygon", "coordinates": [[[-0.9,35.4],[-0.3,35.4],[-0.3,35.9],[-0.9,35.9],[-0.9,35.4]]] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Constantine", "Hotels": 145, "sites": 320, "rating": 4.7, "accessibility": 82 },
+      "geometry": { "type": "Polygon", "coordinates": [[[6.3,36.1],[6.8,36.1],[6.8,36.6],[6.3,36.6],[6.3,36.1]]] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Annaba", "Hotels": 120, "sites": 180, "rating": 4.3, "accessibility": 80 },
+      "geometry": { "type": "Polygon", "coordinates": [[[7.5,36.7],[8.0,36.7],[8.0,37.1],[7.5,37.1],[7.5,36.7]]] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Tlemcen", "Hotels": 95, "sites": 260, "rating": 4.8, "accessibility": 75 },
+      "geometry": { "type": "Polygon", "coordinates": [[[-1.5,34.6],[-0.9,34.6],[-0.9,35.2],[-1.5,35.2],[-1.5,34.6]]] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Tamanrasset", "Hotels": 42, "sites": 380, "rating": 4.9, "accessibility": 45 },
+      "geometry": { "type": "Polygon", "coordinates": [[[4.8,21.5],[6.0,21.5],[6.0,23.0],[4.8,23.0],[4.8,21.5]]] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Ghardaïa", "Hotels": 68, "sites": 290, "rating": 4.6, "accessibility": 60 },
+      "geometry": { "type": "Polygon", "coordinates": [[[3.3,32.1],[3.9,32.1],[3.9,32.7],[3.3,32.7],[3.3,32.1]]] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Béjaïa", "Hotels": 88, "sites": 210, "rating": 4.5, "accessibility": 78 },
+      "geometry": { "type": "Polygon", "coordinates": [[[4.8,36.5],[5.4,36.5],[5.4,36.9],[4.8,36.9],[4.8,36.5]]] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Biskra", "Hotels": 55, "sites": 175, "rating": 4.2, "accessibility": 65 },
+      "geometry": { "type": "Polygon", "coordinates": [[[5.4,34.5],[6.1,34.5],[6.1,35.0],[5.4,35.0],[5.4,34.5]]] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Adrar", "Hotels": 28, "sites": 220, "rating": 4.5, "accessibility": 35 },
+      "geometry": { "type": "Polygon", "coordinates": [[[-0.5,27.5],[0.2,27.5],[0.2,28.2],[-0.5,28.2],[-0.5,27.5]]] }
+    }
+  ]
+}
