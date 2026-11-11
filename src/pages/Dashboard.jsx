@@ -37,12 +37,12 @@ export default function Dashboard() {
       <div style={{ marginBottom: '2rem' }}>
         <div style={{ fontSize: '0.65rem', fontWeight: 700, letterSpacing: '0.14em', color: '#00c851', textTransform: 'uppercase', marginBottom: 6 }}>Analytics Command Center</div>
         <h1 style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(1.6rem, 3vw, 2.4rem)', fontWeight: 700, marginBottom: 6 }}>Tourism Dashboard</h1>
-        <p style={{ fontSize: '0.82rem', color: 'var(--muted)' }}>National KPIs · Real-time tourism intelligence for Algeria</p>
+        <p style={{ fontSize: '0.82rem', color: 'var(--muted)' }}>Summary indicators · Current sample tourism data for Algeria</p>
       </div>
 
       {/* KPI Cards */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 12, marginBottom: '1.8rem' }}>
-        <StatsCard label="Total Wilayas" value={kpis.totalWilayas} sub="Full national coverage" color="#00c851" icon="◎" delay={0} />
+        <StatsCard label="Wilayas in sample" value={kpis.totalWilayas} sub="Current dataset" color="#00c851" icon="◎" delay={0} />
         <StatsCard label="Total Hotels" value={kpis.totalHotels.toLocaleString()} sub="Registered accommodation" color="#ffbb33" icon="🏨" delay={0.06} />
         <StatsCard label="Tourist Sites" value={kpis.totalSites.toLocaleString()} sub="Mapped & categorized" color="#00c851" icon="🏛️" delay={0.12} />
         <StatsCard label="Avg Tourism Score" value={kpis.avgScore} sub="National index" color="#ffbb33" icon="◆" delay={0.18} />
@@ -69,7 +69,7 @@ export default function Dashboard() {
 
       {/* Charts row 1 */}
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, marginBottom: 14 }}>
-        <ChartPanel title="Monthly Tourist Arrivals" subtitle="2024 national data (thousands)" delay={0.3}>
+        <ChartPanel title="Illustrative Monthly Tourist Trend" subtitle="Example values, not official or live statistics" delay={0.3}>
           <ResponsiveContainer width="100%" height={220}>
             <AreaChart data={monthly}>
               <defs>

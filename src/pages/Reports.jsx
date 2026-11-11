@@ -105,7 +105,7 @@ export default function Reports() {
           <div style={{ borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: '1.2rem', marginBottom: '1.5rem' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
               <div>
-                <div style={{ fontSize: '0.6rem', fontWeight: 700, color: '#00c851', letterSpacing: '0.14em', textTransform: 'uppercase', marginBottom: 4 }}>STAA · Official Tourism Report</div>
+                <div style={{ fontSize: '0.6rem', fontWeight: 700, color: '#00c851', letterSpacing: '0.14em', textTransform: 'uppercase', marginBottom: 4 }}>STAA · Sample Tourism Report</div>
                 <div style={{ fontFamily: 'Playfair Display, serif', fontSize: '1.8rem', fontWeight: 700 }}>{selectedWilaya.name}</div>
                 <div style={{ fontSize: '0.78rem', color: 'var(--muted)', marginTop: 2 }}>Wilaya Tourism Intelligence Report · {new Date().getFullYear()}</div>
               </div>
@@ -144,9 +144,9 @@ export default function Reports() {
             </div>
           </div>
 
-          {/* AI Insights in report */}
+          {/* Rule-based insights in report */}
           <div>
-            <div style={{ fontSize: '0.65rem', fontWeight: 700, color: 'var(--dim)', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 8 }}>AI Analysis & Recommendations</div>
+            <div style={{ fontSize: '0.65rem', fontWeight: 700, color: 'var(--dim)', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 8 }}>Rule-based Analysis & Recommendations</div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
               {insights.map((ins, i) => (
                 <div key={i} style={{ display: 'flex', gap: 10, alignItems: 'flex-start', background: 'rgba(255,255,255,0.04)', borderRadius: 10, padding: '9px 12px' }}>

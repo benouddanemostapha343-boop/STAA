@@ -79,6 +79,7 @@ export default function MapExplorer() {
             'Historical',
             'Beach',
             'Desert',
+            'Hotels',
             'Mountains',
             'Culture',
           ].map((cat) => (
@@ -135,7 +136,7 @@ export default function MapExplorer() {
               animation: 'pulse-dot 1.5s infinite',
             }}
           />
-          OpenStreetMap · Leaflet
+          © OpenStreetMap contributors
         </div>
       </div>
 

@@ -8,7 +8,7 @@ const navLinks = [
   { path: '/map', label: 'Map Explorer', icon: '◎' },
   { path: '/analysis', label: 'Analysis', icon: '◆' },
   { path: '/compare', label: 'Compare', icon: '◑' },
-  { path: '/ai-planner', label: 'AI Planner', icon: '✦' },
+  { path: '/ai-planner', label: 'Trip Planner', icon: '✦' },
   { path: '/reports', label: 'Reports', icon: '◈' },
   { path: '/about', label: 'About', icon: '◉' },
 ]
@@ -87,7 +87,7 @@ export default function Navbar() {
           fontSize: '0.65rem', color: '#00c851', fontWeight: 600,
         }}>
           <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#00c851', display: 'inline-block', animation: 'pulse-dot 1.5s infinite' }} />
-          LIVE GIS
+          GIS DEMO
         </div>
 
         {/* Mobile hamburger */}

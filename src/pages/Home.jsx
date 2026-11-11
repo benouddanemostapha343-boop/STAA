@@ -1,17 +1,19 @@
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
+import { getKPIs } from '../services/analyticsService'
 
+const kpis = getKPIs()
 const stats = [
-  { num: '58+', label: 'Wilayas', sub: 'Full national coverage', color: '#00c851' },
-  { num: '1K+', label: 'Tourist Sites', sub: 'Mapped & analyzed', color: '#ffbb33' },
-  { num: 'AI', label: 'Insights', sub: 'Real-time analytics', color: '#00c851' },
-  { num: 'GIS', label: 'Live Data', sub: 'QGIS integrated', color: '#ffbb33' },
+  { num: kpis.totalWilayas, label: 'Wilayas in sample', sub: 'Current tourism dataset', color: '#00c851' },
+  { num: kpis.totalSites.toLocaleString(), label: 'Tourist sites', sub: 'Illustrative sample counts', color: '#ffbb33' },
+  { num: 'Local', label: 'Planning tools', sub: 'Template-based itineraries', color: '#00c851' },
+  { num: '69', label: 'Wilaya boundaries', sub: 'OpenStreetMap polygons', color: '#ffbb33' },
 ]
 
 const features = [
-  { icon: '◎', title: 'Interactive GIS Map', desc: 'Real Leaflet map with OpenStreetMap tiles and QGIS wilaya boundaries', path: '/map' },
-  { icon: '◆', title: 'Tourism Analytics', desc: 'Deep data analysis across all 58 wilayas with KPI dashboards', path: '/dashboard' },
-  { icon: '✦', title: 'AI Travel Planner', desc: 'Generate personalized multi-day itineraries with AI-powered recommendations', path: '/ai-planner' },
+  { icon: '◎', title: 'Interactive GIS Map', desc: 'OpenStreetMap tiles with demonstration boundaries and sample tourism indicators', path: '/map' },
+  { icon: '◆', title: 'Tourism Analytics', desc: 'Explore sample tourism indicators with KPI dashboards', path: '/dashboard' },
+  { icon: '✦', title: 'Trip Planner', desc: 'Build sample multi-day itineraries from built-in destination and activity templates', path: '/ai-planner' },
   { icon: '◑', title: 'Wilaya Comparison', desc: 'Side-by-side radar chart comparison of any two Algerian wilayas', path: '/compare' },
   { icon: '◈', title: 'Territorial Analysis', desc: 'Identify tourism opportunity zones and investment priority areas', path: '/analysis' },
   { icon: '📄', title: 'Report Generator', desc: 'Export comprehensive tourism reports with statistics and recommendations', path: '/reports' },
@@ -40,7 +42,7 @@ export default function Home() {
           backgroundSize: '60px 60px',
         }} />
 
-        {/* Live badge */}
+        {/* Status badge */}
         <motion.div
           initial={{ opacity: 0, y: -12 }}
           animate={{ opacity: 1, y: 0 }}
@@ -54,7 +56,7 @@ export default function Home() {
           }}
         >
           <span style={{ width: 7, height: 7, borderRadius: '50%', background: '#00c851', display: 'inline-block', animation: 'pulse-dot 1.5s infinite' }} />
-          LIVE GIS PLATFORM · ALGERIA
+          GIS PROTOTYPE · ALGERIA
         </motion.div>
 
         {/* Main heading */}
@@ -89,8 +91,8 @@ export default function Home() {
             maxWidth: 520, lineHeight: 1.8, marginBottom: '2.5rem',
           }}
         >
-          AI-powered geospatial platform for understanding and developing Algeria's
-          tourism potential across all 58 wilayas — from the Mediterranean coast to the Saharan depths.
+          A geospatial prototype for exploring Algeria's tourism potential. The included dataset covers
+          20 sample wilayas; replace it with verified official data before making decisions.
         </motion.p>
 
         {/* CTA buttons */}

@@ -5,7 +5,7 @@
 
 export async function loadAlgeriaGeoJSON() {
   try {
-    const res = await fetch('/data/algeria_wilayas.geojson');
+    const res = await fetch('/data/algeria_wilayas.geojson', { cache: 'no-store' });
     if (!res.ok) throw new Error('GeoJSON not found');
     return await res.json();
   } catch {

@@ -4,24 +4,47 @@ import { generateTripPlan } from '../services/aiService'
 
 const tripTypes = ['Desert', 'History', 'Beach', 'Adventure', 'Culture']
 const dayOptions = [3, 5, 7]
-const budgets = ['Low', 'Medium', 'High']
 
 const budgetColors = { Low: '#60a5fa', Medium: '#ffbb33', High: '#00c851' }
+const budgetLabels = { Low: 'Economy', Medium: 'Standard', High: 'Premium' }
 const typeIcons = { Desert: '🏜️', History: '🏛️', Beach: '🏖️', Adventure: '⛰️', Culture: '🎭' }
+
+function getBudgetLevel(dailyBudget) {
+  if (dailyBudget < 15000) return 'Low'
+  if (dailyBudget < 40000) return 'Medium'
+  return 'High'
+}
+
+function formatDzd(amount) {
+  return `${new Intl.NumberFormat('en-US', { maximumFractionDigits: 0 }).format(Math.round(amount))} DZD`
+}
 
 export default function AIPlanner() {
   const [tripType, setTripType] = useState('Desert')
   const [days, setDays] = useState(5)
-  const [budget, setBudget] = useState('Medium')
+  const [budgetAmount, setBudgetAmount] = useState('150000')
   const [plan, setPlan] = useState(null)
   const [loading, setLoading] = useState(false)
+  const numericBudget = Number(budgetAmount)
+  const budgetIsValid = Number.isSafeInteger(numericBudget) && numericBudget >= 1000 && numericBudget <= 100000000
+  const dailyBudget = budgetIsValid ? numericBudget / days : 0
+  const budgetLevel = getBudgetLevel(dailyBudget)
 
   function generate() {
+    if (!budgetIsValid) return
+
     setLoading(true)
     setPlan(null)
     setTimeout(() => {
-      const result = generateTripPlan(tripType, days, budget)
-      setPlan(result)
+      const result = generateTripPlan(tripType, days, budgetLevel)
+      setPlan({
+        itinerary: result,
+        tripType,
+        days,
+        budgetAmount: numericBudget,
+        dailyBudget,
+        budgetLevel,
+      })
       setLoading(false)
     }, 1200)
   }
@@ -33,9 +56,9 @@ export default function AIPlanner() {
     >
       {/* Header */}
       <div style={{ marginBottom: '2rem' }}>
-        <div style={{ fontSize: '0.65rem', fontWeight: 700, letterSpacing: '0.14em', color: '#00c851', textTransform: 'uppercase', marginBottom: 6 }}>Powered by AI</div>
-        <h1 style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(1.6rem, 3vw, 2.4rem)', fontWeight: 700, marginBottom: 6 }}>AI Travel Planner</h1>
-        <p style={{ fontSize: '0.82rem', color: 'var(--muted)' }}>Generate personalized Algerian itineraries with intelligent recommendations</p>
+        <div style={{ fontSize: '0.65rem', fontWeight: 700, letterSpacing: '0.14em', color: '#00c851', textTransform: 'uppercase', marginBottom: 6 }}>Local planning assistant</div>
+        <h1 style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(1.6rem, 3vw, 2.4rem)', fontWeight: 700, marginBottom: 6 }}>Trip Planner</h1>
+        <p style={{ fontSize: '0.82rem', color: 'var(--muted)' }}>Build a sample Algerian itinerary from built-in destination and activity templates</p>
       </div>
 
       {/* Config panel */}
@@ -52,7 +75,11 @@ export default function AIPlanner() {
                 <motion.button
                   key={type}
                   whileTap={{ scale: 0.97 }}
-                  onClick={() => setTripType(type)}
+                  disabled={loading}
+                  onClick={() => {
+                    setTripType(type)
+                    setPlan(null)
+                  }}
                   style={{
                     background: tripType === type ? 'rgba(0,200,81,0.12)' : 'var(--glass)',
                     border: `1px solid ${tripType === type ? 'rgba(0,200,81,0.4)' : 'var(--border)'}`,
@@ -79,7 +106,11 @@ export default function AIPlanner() {
                 <motion.button
                   key={d}
                   whileTap={{ scale: 0.95 }}
-                  onClick={() => setDays(d)}
+                  disabled={loading}
+                  onClick={() => {
+                    setDays(d)
+                    setPlan(null)
+                  }}
                   style={{
                     flex: 1,
                     background: days === d ? 'rgba(0,200,81,0.12)' : 'var(--glass)',
@@ -97,27 +128,54 @@ export default function AIPlanner() {
             </div>
 
             {/* Budget */}
-            <div style={{ fontSize: '0.65rem', fontWeight: 700, letterSpacing: '0.12em', color: 'var(--dim)', textTransform: 'uppercase', marginBottom: 12 }}>Budget Level</div>
-            <div style={{ display: 'flex', gap: 8 }}>
-              {budgets.map(b => (
-                <motion.button
-                  key={b}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={() => setBudget(b)}
-                  style={{
-                    flex: 1,
-                    background: budget === b ? `${budgetColors[b]}18` : 'var(--glass)',
-                    border: `1px solid ${budget === b ? `${budgetColors[b]}50` : 'var(--border)'}`,
-                    color: budget === b ? budgetColors[b] : 'var(--muted)',
-                    borderRadius: 10, padding: '9px 8px', textAlign: 'center',
-                    cursor: 'pointer', transition: 'all 0.18s', fontSize: '0.82rem',
-                    fontFamily: 'DM Sans, sans-serif', fontWeight: budget === b ? 700 : 400,
-                  }}
-                >
-                  {b === 'Low' ? '💰' : b === 'Medium' ? '💰💰' : '💰💰💰'}
-                  <div style={{ fontSize: '0.7rem', marginTop: 2 }}>{b}</div>
-                </motion.button>
-              ))}
+            <div style={{ fontSize: '0.65rem', fontWeight: 700, letterSpacing: '0.12em', color: 'var(--dim)', textTransform: 'uppercase', marginBottom: 12 }}>Trip Budget</div>
+            <label htmlFor="trip-budget" style={{ display: 'block', fontSize: '0.78rem', color: 'var(--muted)', marginBottom: 7 }}>
+              Total per traveler · Algerian dinars (DZD)
+            </label>
+            <div style={{ position: 'relative' }}>
+              <input
+                id="trip-budget"
+                type="number"
+                min="1000"
+                max="100000000"
+                step="1"
+                inputMode="numeric"
+                value={budgetAmount}
+                disabled={loading}
+                aria-invalid={!budgetIsValid}
+                aria-describedby="budget-guidance"
+                onChange={event => {
+                  setBudgetAmount(event.target.value)
+                  setPlan(null)
+                }}
+                style={{
+                  width: '100%', background: 'var(--bg2)', border: `1px solid ${budgetIsValid ? 'var(--border)' : '#ff6b6b'}`,
+                  color: '#fff', borderRadius: 10, padding: '12px 54px 12px 14px',
+                  fontSize: '1rem', fontWeight: 700, fontFamily: 'DM Sans, sans-serif',
+                  outline: 'none',
+                }}
+              />
+              <span style={{ position: 'absolute', right: 14, top: '50%', transform: 'translateY(-50%)', color: 'var(--muted)', fontSize: '0.78rem', pointerEvents: 'none' }}>DZD</span>
+            </div>
+            <div id="budget-guidance" style={{ marginTop: 9, padding: '9px 11px', borderRadius: 9, background: `${budgetColors[budgetLevel]}12`, border: `1px solid ${budgetColors[budgetLevel]}35` }}>
+              {budgetIsValid ? (
+                <>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', gap: 8, fontSize: '0.76rem' }}>
+                    <span style={{ color: budgetColors[budgetLevel], fontWeight: 700 }}>{budgetLabels[budgetLevel]} plan</span>
+                    <span style={{ color: '#fff' }}>{formatDzd(dailyBudget)} / day</span>
+                  </div>
+                  <div style={{ fontSize: '0.68rem', color: 'var(--muted)', lineHeight: 1.5, marginTop: 5 }}>
+                    Planning tiers: under 15,000 DZD/day · 15,000–39,999 DZD/day · 40,000+ DZD/day.
+                  </div>
+                  <div style={{ fontSize: '0.66rem', color: 'var(--dim)', lineHeight: 1.5, marginTop: 3 }}>
+                    These ranges choose template options; they are not live prices or quotations.
+                  </div>
+                </>
+              ) : (
+                <div role="alert" style={{ color: '#ff8888', fontSize: '0.72rem' }}>
+                  Enter a whole amount from 1,000 to 100,000,000 DZD.
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -125,13 +183,13 @@ export default function AIPlanner() {
         <motion.button
           whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.98 }}
           onClick={generate}
-          disabled={loading}
+          disabled={loading || !budgetIsValid}
           style={{
             width: '100%', marginTop: '1.5rem',
-            background: loading ? 'rgba(0,200,81,0.3)' : 'linear-gradient(135deg, #00c851, #009938)',
+            background: loading || !budgetIsValid ? 'rgba(0,200,81,0.3)' : 'linear-gradient(135deg, #00c851, #009938)',
             color: '#fff', border: 'none', borderRadius: 12,
             padding: '13px', fontSize: '0.9rem', fontWeight: 700,
-            cursor: loading ? 'wait' : 'pointer', fontFamily: 'DM Sans, sans-serif',
+            cursor: loading ? 'wait' : !budgetIsValid ? 'not-allowed' : 'pointer', fontFamily: 'DM Sans, sans-serif',
             display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
             boxShadow: '0 0 20px rgba(0,200,81,0.25)',
           }}
@@ -155,19 +213,19 @@ export default function AIPlanner() {
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.5rem' }}>
               <div>
                 <div style={{ fontFamily: 'Playfair Display, serif', fontSize: '1.3rem', fontWeight: 700 }}>
-                  {typeIcons[tripType]} {tripType} Journey · {days} Days
+                  {typeIcons[plan.tripType]} {plan.tripType} Journey · {plan.days} Days
                 </div>
                 <div style={{ fontSize: '0.72rem', color: 'var(--muted)', marginTop: 3 }}>
-                  {budget} budget · Algeria · AI-curated itinerary
+                  {formatDzd(plan.budgetAmount)} total · {formatDzd(plan.dailyBudget)} per day · {budgetLabels[plan.budgetLevel]} plan
                 </div>
               </div>
               <div style={{ background: 'rgba(0,200,81,0.1)', border: '1px solid rgba(0,200,81,0.25)', borderRadius: 20, padding: '4px 12px', fontSize: '0.65rem', color: '#00c851', fontWeight: 700 }}>
-                ✦ AI Generated
+                ✦ Template generated
               </div>
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-              {plan.map((day, i) => (
+              {plan.itinerary.map((day, i) => (
                 <motion.div
                   key={day.day}
                   initial={{ opacity: 0, x: -12 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.07 }}
@@ -191,6 +249,7 @@ export default function AIPlanner() {
                     <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
                       <span style={{ fontSize: '0.68rem', color: 'var(--muted)', background: 'rgba(255,255,255,0.05)', padding: '2px 8px', borderRadius: 4 }}>🏨 {day.accommodation}</span>
                       <span style={{ fontSize: '0.68rem', color: 'var(--muted)', background: 'rgba(255,255,255,0.05)', padding: '2px 8px', borderRadius: 4 }}>🍽️ {day.meals}</span>
+                      <span style={{ fontSize: '0.68rem', color: 'var(--muted)', background: 'rgba(255,255,255,0.05)', padding: '2px 8px', borderRadius: 4 }}>🎯 Daily budget: {formatDzd(plan.dailyBudget)}</span>
                     </div>
                   </div>
                 </motion.div>
@@ -198,7 +257,7 @@ export default function AIPlanner() {
             </div>
 
             <div style={{ marginTop: '1.2rem', padding: '10px 14px', background: 'rgba(0,200,81,0.06)', border: '1px solid rgba(0,200,81,0.2)', borderRadius: 10, fontSize: '0.75rem', color: 'var(--muted)' }}>
-              ✦ This itinerary was AI-generated based on real tourism data. Adjust duration or budget level to explore other combinations.
+              This sample itinerary uses built-in templates; it is not generated by an AI service or live tourism data.
             </div>
           </motion.div>
         )}
