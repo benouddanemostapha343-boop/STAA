@@ -6,6 +6,14 @@ import { getScoreColor } from '../services/geoService'
 
 const wilayas = getAllWilayas()
 const kpis = getKPIs()
+const investmentThemes = {
+  Historical: 'Heritage tours and locally owned guesthouses',
+  Culture: 'Cultural activities, crafts, and food experiences',
+  Beach: 'Coastal stays and guided water activities',
+  Desert: 'Desert stays, guided excursions, and transport',
+  Mountains: 'Eco-stays and guided outdoor experiences',
+  Adventure: 'Guided outdoor and nature experiences',
+}
 
 export default function Reports() {
   const [selectedWilaya, setSelectedWilaya] = useState(wilayas[0])
@@ -28,6 +36,9 @@ export default function Reports() {
 
   const insights = generateInsights(selectedWilaya)
   const scoreColor = getScoreColor(selectedWilaya.score)
+  const suggestedThemes = selectedWilaya.types
+    .map(type => investmentThemes[type])
+    .filter(Boolean)
 
   return (
     <motion.div
@@ -105,7 +116,7 @@ export default function Reports() {
           <div style={{ borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: '1.2rem', marginBottom: '1.5rem' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
               <div>
-                <div style={{ fontSize: '0.6rem', fontWeight: 700, color: '#00c851', letterSpacing: '0.14em', textTransform: 'uppercase', marginBottom: 4 }}>STAA · Official Tourism Report</div>
+                <div style={{ fontSize: '0.6rem', fontWeight: 700, color: '#00c851', letterSpacing: '0.14em', textTransform: 'uppercase', marginBottom: 4 }}>STAA · Sample Tourism Report</div>
                 <div style={{ fontFamily: 'Playfair Display, serif', fontSize: '1.8rem', fontWeight: 700 }}>{selectedWilaya.name}</div>
                 <div style={{ fontSize: '0.78rem', color: 'var(--muted)', marginTop: 2 }}>Wilaya Tourism Intelligence Report · {new Date().getFullYear()}</div>
               </div>
@@ -144,9 +155,34 @@ export default function Reports() {
             </div>
           </div>
 
-          {/* AI Insights in report */}
+          {/* Exploratory investor brief */}
+          <div style={{ marginBottom: '1.5rem', padding: '1rem', background: 'rgba(255,187,51,0.06)', border: '1px solid rgba(255,187,51,0.2)', borderRadius: 12 }}>
+            <div style={{ fontSize: '0.65rem', fontWeight: 700, color: '#ffbb33', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 8 }}>Exploratory Investment Brief</div>
+            <div style={{ fontSize: '0.78rem', color: '#fff', fontWeight: 600, marginBottom: 6 }}>Potential themes to validate</div>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 10 }}>
+              {suggestedThemes.map(theme => (
+                <span key={theme} style={{ background: 'rgba(255,187,51,0.08)', border: '1px solid rgba(255,187,51,0.2)', color: '#ffd166', padding: '4px 9px', borderRadius: 20, fontSize: '0.68rem' }}>
+                  {theme}
+                </span>
+              ))}
+            </div>
+            <div style={{ fontSize: '0.72rem', color: 'var(--muted)', lineHeight: 1.6 }}>
+              These themes are derived from the listed tourism categories, not from verified market demand or financial projections.
+            </div>
+            <div style={{ marginTop: 10, fontSize: '0.68rem', fontWeight: 700, color: 'var(--dim)', letterSpacing: '0.08em', textTransform: 'uppercase' }}>Before investing, validate</div>
+            <ul style={{ margin: '6px 0 0', paddingLeft: 18, color: 'var(--muted)', fontSize: '0.72rem', lineHeight: 1.7 }}>
+              <li>Tourist-site and accommodation figures with a dated, authoritative source.</li>
+              <li>Seasonal demand, customer willingness to pay, and local operator interest.</li>
+              <li>Permits, access, partners, startup costs, and ongoing operating costs.</li>
+            </ul>
+            <div style={{ marginTop: 10, paddingTop: 8, borderTop: '1px solid rgba(255,255,255,0.08)', fontSize: '0.68rem', color: '#ffd166', lineHeight: 1.5 }}>
+              Demo dataset: source dates, demand, pricing, and project costs are not verified. This brief is not investment advice.
+            </div>
+          </div>
+
+          {/* Rule-based insights in report */}
           <div>
-            <div style={{ fontSize: '0.65rem', fontWeight: 700, color: 'var(--dim)', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 8 }}>AI Analysis & Recommendations</div>
+            <div style={{ fontSize: '0.65rem', fontWeight: 700, color: 'var(--dim)', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 8 }}>Rule-based Analysis & Recommendations</div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
               {insights.map((ins, i) => (
                 <div key={i} style={{ display: 'flex', gap: 10, alignItems: 'flex-start', background: 'rgba(255,255,255,0.04)', borderRadius: 10, padding: '9px 12px' }}>

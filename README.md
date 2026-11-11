@@ -1,11 +1,17 @@
 # STAA — Smart Tourism & Territorial Analytics Algeria
 
-A professional GIS-powered tourism intelligence platform built with React, Leaflet, and AI analytics.
+A React and Leaflet prototype for exploring tourism indicators in Algeria.
+
+The map uses 69 OpenStreetMap-derived wilaya boundaries; the bundled tourism dataset has sample indicators for 20 wilayas. Areas without tourism sample data are shown without a score. Visitor trends are illustrative, itineraries use local templates, and recommendations are rule-based; these are not live statistics or an AI service. Replace the sample indicators with verified sources before using results for planning.
+
+The report generator includes exploratory investor themes based on each wilaya's listed tourism categories, plus due-diligence prompts. It does not estimate demand, revenue, or return on investment; the bundled sample indicators are not investment-grade evidence.
+
+The trip planner supports 1–14 day durations, up to 20 travelers, and interest-based activity preferences. It accepts a total budget per traveler in DZD and uses the daily amount to choose an illustrative itinerary tier. Its ranges are planning heuristics, not verified prices or quotations; matching activities and destinations come from bundled templates.
 
 ## 🚀 Quick Start
 
 ```bash
-# Install dependencies
+# Install dependencies (Node.js and npm required)
 npm install
 
 # Start development server
@@ -21,6 +27,7 @@ npm run build
 STAA/
 ├── public/
 │   └── data/
+│       ├── ATTRIBUTION.md
 │       └── algeria_wilayas.geojson   ← Replace with your QGIS export
 ├── src/
 │   ├── components/
@@ -54,9 +61,9 @@ STAA/
 
 ## 🗺️ QGIS Integration
 
-Export your wilaya layer from QGIS as GeoJSON and place it in `public/data/algeria_wilayas.geojson`.
+Export your wilaya layer from QGIS as GeoJSON and replace `public/data/algeria_wilayas.geojson`. The bundled file contains actual OSM-derived boundaries, with attribution and licensing information in `public/data/ATTRIBUTION.md`.
 
-Required properties per feature:
+Feature names should match the names in `src/data/tourism.json`. Optional tourism properties can be supplied as:
 ```json
 {
   "name": "Alger",

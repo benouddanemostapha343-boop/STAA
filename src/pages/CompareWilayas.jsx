@@ -1,8 +1,7 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { RadarChart, Radar, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer, Legend, Tooltip } from 'recharts'
 import { getAllWilayas } from '../services/analyticsService'
-import { getScoreColor } from '../services/geoService'
 
 const wilayas = getAllWilayas()
 
@@ -18,15 +17,15 @@ function buildRadarData(wA, wB) {
   ]
 }
 
-function MetricRow({ label, valA, valB, colorA, colorB, maxVal = 100 }) {
+function MetricRow({ label, valA, valB, colorA, colorB, maxVal = 100, suffix = '' }) {
   const pA = Math.min((valA / maxVal) * 100, 100)
   const pB = Math.min((valB / maxVal) * 100, 100)
   return (
     <div style={{ marginBottom: 14 }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 5, fontSize: '0.78rem' }}>
-        <span style={{ color: colorA, fontWeight: 600 }}>{valA}</span>
+        <span style={{ color: colorA, fontWeight: 600 }}>{valA}{suffix}</span>
         <span style={{ color: 'var(--muted)' }}>{label}</span>
-        <span style={{ color: colorB, fontWeight: 600 }}>{valB}</span>
+        <span style={{ color: colorB, fontWeight: 600 }}>{valB}{suffix}</span>
       </div>
       <div style={{ position: 'relative', height: 6, borderRadius: 3, background: 'rgba(255,255,255,0.08)' }}>
         <div style={{ position: 'absolute', left: 0, top: 0, height: '100%', width: `${pA}%`, background: colorA, borderRadius: 3, opacity: 0.8 }} />
@@ -176,7 +175,7 @@ export default function CompareWilayas() {
           <MetricRow label="Hotels" valA={wA.hotels} valB={wB.hotels} colorA={colorA} colorB={colorB} maxVal={312} />
           <MetricRow label="Tourist Sites" valA={wA.sites} valB={wB.sites} colorA={colorA} colorB={colorB} maxVal={420} />
           <MetricRow label="Rating" valA={wA.rating} valB={wB.rating} colorA={colorA} colorB={colorB} maxVal={5} />
-          <MetricRow label="Accessibility" valA={`${wA.accessibility}%`} valB={`${wB.accessibility}%`} colorA={colorA} colorB={colorB} maxVal={100} />
+          <MetricRow label="Accessibility" valA={wA.accessibility} valB={wB.accessibility} colorA={colorA} colorB={colorB} maxVal={100} suffix="%" />
           <MetricRow label="Tourism Score" valA={wA.score} valB={wB.score} colorA={colorA} colorB={colorB} maxVal={100} />
 
           <div style={{ marginTop: 16, padding: '10px 12px', background: 'rgba(255,255,255,0.04)', borderRadius: 10, fontSize: '0.78rem', color: 'var(--muted)' }}>

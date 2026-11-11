@@ -12,12 +12,12 @@ const techStack = [
 ]
 
 const features = [
-  { icon: '◎', title: 'Real Leaflet Maps', desc: 'OpenStreetMap tiles with QGIS-exported GeoJSON wilaya layers. Click any wilaya for instant AI-generated insights.' },
+  { icon: '◎', title: 'Interactive GIS Map', desc: 'OpenStreetMap tiles and actual wilaya boundaries, with sample tourism indicators for 20 wilayas.' },
   { icon: '◆', title: 'Tourism Score Algorithm', desc: 'Proprietary index: 40% tourist sites + 30% hotels + 20% visitor rating + 10% accessibility.' },
-  { icon: '✦', title: 'AI Travel Planner', desc: 'Generates personalized multi-day itineraries based on journey type, duration, and budget level.' },
-  { icon: '◑', title: 'Wilaya Comparison', desc: 'Radar chart head-to-head comparison of any two of Algeria\'s 58 wilayas with live metric bars.' },
+  { icon: '✦', title: 'Travel Planner', desc: 'Builds sample multi-day itineraries from built-in templates based on journey type, duration, and budget.' },
+  { icon: '◑', title: 'Wilaya Comparison', desc: 'Radar chart comparison of entries in the included sample dataset.' },
   { icon: '📍', title: 'Opportunity Zones', desc: 'Color-coded scoring system identifies green (high investment), yellow (medium), and red (developing) zones.' },
-  { icon: '📄', title: 'Report Generator', desc: 'Browser-print PDF export with full KPIs, tourism categories, and AI recommendations per wilaya.' },
+  { icon: '📄', title: 'Report Generator', desc: 'Browser-print PDF export with sample indicators, tourism categories, and rule-based recommendations.' },
 ]
 
 export default function About() {
@@ -46,7 +46,7 @@ export default function About() {
         </h1>
         <p style={{ fontSize: '1rem', color: 'var(--muted)', maxWidth: 560, margin: '0 auto', lineHeight: 1.8 }}>
           <strong style={{ color: '#fff' }}>Smart Tourism & Territorial Analytics Algeria</strong> — 
-          a professional GIS-powered intelligence platform for analyzing, comparing, and developing tourism across Algeria's 58 wilayas.
+          a GIS prototype for exploring tourism indicators across Algeria. The current sample dataset includes 20 wilayas.
         </p>
       </div>
 
@@ -124,10 +124,9 @@ export default function About() {
           <div>
             <h3 style={{ fontFamily: 'Playfair Display, serif', fontSize: '1.2rem', fontWeight: 700, marginBottom: 8 }}>QGIS Integration</h3>
             <p style={{ fontSize: '0.82rem', color: 'var(--muted)', lineHeight: 1.8, marginBottom: '1rem' }}>
-              This platform is designed to consume real QGIS-exported data. Place your{' '}
-              <code style={{ background: 'rgba(0,200,81,0.15)', color: '#00c851', padding: '1px 6px', borderRadius: 4, fontSize: '0.78rem' }}>algeria_wilayas.geojson</code>
-              {' '}file in <code style={{ background: 'rgba(255,255,255,0.08)', color: '#fff', padding: '1px 6px', borderRadius: 4, fontSize: '0.78rem' }}>public/data/</code> directory.
-              The map automatically reads wilaya boundaries and merges them with tourism analytics.
+              The map uses 69 OpenStreetMap-derived wilaya boundaries; tourism indicators are sample data for 20 wilayas and are shown only where available. Replace the sample indicators with verified sources before using results for planning. To update the boundaries, replace{' '}
+              <code style={{ background: 'rgba(0,200,81,0.15)', color: '#00c851', padding: '1px 6px', borderRadius: 4, fontSize: '0.78rem' }}>public/data/algeria_wilayas.geojson</code>
+              {' '}with a QGIS export. The map matches feature names to tourism records where available.
             </p>
             <div style={{ background: 'rgba(0,0,0,0.3)', borderRadius: 10, padding: '12px 16px', fontFamily: 'monospace', fontSize: '0.78rem', color: '#00c851' }}>
               <div style={{ color: 'var(--dim)', marginBottom: 4 }}># Expected GeoJSON properties:</div>

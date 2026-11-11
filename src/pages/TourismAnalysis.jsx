@@ -87,7 +87,7 @@ export default function TourismAnalysis() {
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
             <div>
               <div style={{ fontFamily: 'Playfair Display, serif', fontSize: '1.2rem', fontWeight: 700 }}>{selectedWilaya.name}</div>
-              <div style={{ fontSize: '0.72rem', color: 'var(--muted)', marginTop: 2 }}>{selectedWilaya.region} Algeria · AI-Generated Insights</div>
+              <div style={{ fontSize: '0.72rem', color: 'var(--muted)', marginTop: 2 }}>{selectedWilaya.region} Algeria · Rule-based insights</div>
             </div>
             <button onClick={() => setSelectedWilaya(null)} style={{ background: 'var(--glass)', border: '1px solid var(--border)', color: 'var(--muted)', borderRadius: 8, padding: '4px 10px', cursor: 'pointer', fontSize: '0.75rem', fontFamily: 'DM Sans, sans-serif' }}>✕ Close</button>
           </div>
@@ -100,7 +100,7 @@ export default function TourismAnalysis() {
       {/* All wilaya cards */}
       <div style={{ marginBottom: '1rem' }}>
         <h2 style={{ fontFamily: 'Playfair Display, serif', fontSize: '1.2rem', fontWeight: 700, marginBottom: '0.4rem' }}>All Wilayas</h2>
-        <p style={{ fontSize: '0.78rem', color: 'var(--muted)' }}>Click any card to explore AI insights</p>
+        <p style={{ fontSize: '0.78rem', color: 'var(--muted)' }}>Click any card to explore rule-based insights</p>
       </div>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: 12 }}>
         {wilayas.map((w, i) => (
