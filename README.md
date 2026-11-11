@@ -4,7 +4,7 @@ A React and Leaflet prototype for exploring tourism indicators in Algeria.
 
 The map uses 69 OpenStreetMap-derived wilaya boundaries; the bundled tourism dataset has sample indicators for 20 wilayas. Areas without tourism sample data are shown without a score. Visitor trends are illustrative, itineraries use local templates, and recommendations are rule-based; these are not live statistics or an AI service. Replace the sample indicators with verified sources before using results for planning.
 
-The trip planner accepts a total budget per traveler in DZD and uses the daily amount to choose an illustrative itinerary tier. Its ranges are planning heuristics, not verified prices or quotations.
+The trip planner supports 1–14 day durations, up to 20 travelers, and interest-based activity preferences. It accepts a total budget per traveler in DZD and uses the daily amount to choose an illustrative itinerary tier. Its ranges are planning heuristics, not verified prices or quotations; matching activities and destinations come from bundled templates.
 
 ## 🚀 Quick Start
 

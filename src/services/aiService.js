@@ -52,7 +52,7 @@ export function generateInsights(wilaya) {
   return insights;
 }
 
-export function generateTripPlan(type, days, budget) {
+export function generateTripPlan(type, days, budget, interests = []) {
   const plans = {
     Desert: {
       Low: ['Ghardaïa Old City', 'Ouargla Oasis', 'Biskra Palm Groves'],
@@ -82,25 +82,73 @@ export function generateTripPlan(type, days, budget) {
   };
 
   const destinations = plans[type]?.[budget] || plans.History.Medium;
+  const activities = {
+    Desert: [
+      { label: 'Camel Trek at Sunrise', interests: ['adventure', 'nature'] },
+      { label: 'Sandboarding & Dune Exploration', interests: ['adventure', 'nature'] },
+      { label: 'Stargazing Camp Night', interests: ['nature', 'photography', 'relaxation'] },
+      { label: 'Oasis Village Visit', interests: ['culture', 'history'] },
+      { label: 'Desert Photography Walk', interests: ['photography', 'nature'] },
+      { label: 'Berber Culture Evening', interests: ['culture', 'food'] },
+      { label: 'Traditional Crafts Workshop', interests: ['culture'] },
+    ],
+    History: [
+      { label: 'Guided Archaeological Site Tour', interests: ['history', 'adventure'] },
+      { label: 'Museum Deep Dive', interests: ['history', 'culture'] },
+      { label: 'Old Medina Walking Tour', interests: ['history', 'culture', 'photography', 'adventure'] },
+      { label: 'Ancient Ruins Photography', interests: ['history', 'photography'] },
+      { label: 'Local Historian Meeting', interests: ['history', 'culture'] },
+      { label: 'Heritage Craft Workshop', interests: ['culture'] },
+      { label: 'Traditional Food Tasting', interests: ['food', 'culture'] },
+    ],
+    Beach: [
+      { label: 'Morning Snorkeling', interests: ['sea', 'adventure', 'nature'] },
+      { label: 'Coastal Kayaking', interests: ['sea', 'adventure', 'nature'] },
+      { label: 'Cliff Diving', interests: ['adventure', 'sea'] },
+      { label: 'Seafood Gastronomy Tour', interests: ['food', 'culture'] },
+      { label: 'Sunset Sailing', interests: ['sea', 'nature', 'relaxation'] },
+      { label: 'Beach Volleyball Tournament', interests: ['adventure', 'sea'] },
+      { label: 'Underwater Photography', interests: ['photography', 'sea'] },
+    ],
+    Adventure: [
+      { label: 'Mountain Hiking', interests: ['adventure', 'nature'] },
+      { label: 'Rock Climbing', interests: ['adventure', 'nature'] },
+      { label: 'Zip-lining', interests: ['adventure'] },
+      { label: 'White Water Rafting', interests: ['adventure', 'nature'] },
+      { label: 'Cave Exploration', interests: ['adventure', 'nature', 'photography'] },
+      { label: 'Paragliding', interests: ['adventure', 'nature'] },
+      { label: 'Local Culture & Crafts Visit', interests: ['culture', 'photography'] },
+    ],
+    Culture: [
+      { label: 'Traditional Cooking Class', interests: ['food', 'culture'] },
+      { label: 'Local Music Performance', interests: ['culture'] },
+      { label: 'Artisan Market Visit', interests: ['culture', 'food', 'photography'] },
+      { label: 'Calligraphy Workshop', interests: ['culture'] },
+      { label: 'Tea Ceremony', interests: ['culture', 'relaxation'] },
+      { label: 'Folk Dance Show', interests: ['culture'] },
+      { label: 'Storytelling Evening', interests: ['culture', 'history'] },
+    ],
+  }
+  const activityOptions = activities[type] || activities.History
 
   return Array.from({ length: Number(days) }, (_, i) => ({
     day: i + 1,
     destination: destinations[i % destinations.length],
-    activity: getActivity(type, i),
+    activity: getActivity(activityOptions, i, interests),
     accommodation: getAccommodation(budget),
     meals: getMeals(budget),
   }));
 }
 
-function getActivity(type, day) {
-  const activities = {
-    Desert: ['Camel Trek at Sunrise', 'Sandboarding & Dune Exploration', 'Stargazing Camp Night', 'Oasis Village Visit', 'Desert Photography Walk', 'Berber Culture Evening', 'Traditional Crafts Workshop'],
-    History: ['Guided Archaeological Site Tour', 'Museum Deep Dive', 'Old Medina Walking Tour', 'Ancient Ruins Photography', 'Local Historian Meeting', 'Heritage Craft Workshop', 'Roman Amphitheater Visit'],
-    Beach: ['Morning Snorkeling', 'Coastal Kayaking', 'Cliff Diving', 'Seafood Gastronomy Tour', 'Sunset Sailing', 'Beach Volleyball Tournament', 'Underwater Photography'],
-    Adventure: ['Mountain Hiking', 'Rock Climbing', 'Zip-lining', 'White Water Rafting', 'Cave Exploration', 'Paragliding', 'Off-road 4x4 Safari'],
-    Culture: ['Traditional Cooking Class', 'Local Music Performance', 'Artisan Market Visit', 'Calligraphy Workshop', 'Tea Ceremony', 'Folk Dance Show', 'Storytelling Evening'],
-  };
-  return (activities[type] || activities.History)[day % 7];
+function getActivity(activities, day, interests) {
+  const options = interests.length
+    ? [...activities].sort((first, second) => {
+      const firstMatches = first.interests.filter(interest => interests.includes(interest)).length
+      const secondMatches = second.interests.filter(interest => interests.includes(interest)).length
+      return secondMatches - firstMatches
+    })
+    : activities
+  return options[day % options.length].label
 }
 
 function getAccommodation(budget) {
